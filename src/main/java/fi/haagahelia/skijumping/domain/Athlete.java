@@ -1,17 +1,36 @@
 package fi.haagahelia.skijumping.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "athlete")
 public class Athlete {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+	
+	@Column(name = "firstname")
 	private String firstName;
+	
+	@Column(name = "lastname")
 	private String lastName;
+	
+	@Column(name = "nationality")
 	private String nationality;
+	
+	@Column(name = "birthyear")
 	private int birthYear;
 		
 	public Athlete() {
 	}
 
 	public Athlete(String firstName, String lastName, String nationality, int birthYear) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nationality = nationality;

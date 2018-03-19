@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Athletes</title>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+	<h2>Athletes</h2>
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Name</th>
+				<th>Nationality</th>
+				<th>Birth year</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="athlete: ${athletes}">
+				<td th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
+				<td th:text="${athlete.nationality}"></td>
+				<td th:text="${athlete.birthYear}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<a class="btn btn-outline-warning" th:href="@{/addAthlete}">Add Athlete</a>
+	</div>
+
+</body>
+</html>

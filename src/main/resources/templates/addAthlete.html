@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Add athlete</title>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<h1>Add athlete</h1>
+	<div class="container">
+	<div class="form-group">
+		<form th:object="${athlete}" th:action="@{saveAthlete}" action="#" method="post">
+			<label for="firstName">First name</label>
+			<input type="text" id="firstName" th:field="*{firstName}" class="form-control" />
+			<label for="lastName">Last name</label>
+			<input type="text" id="lastName" th:field="*{lastName}" class="form-control" />
+			<label for="nationality">Nationality</label>
+			<input type="text" id="nationality" th:field="*{nationality}" class="form-control" />
+			<label for="birthYear">Birth year</label>
+			<input type="text" id="birthYear" th:field="*{birthYear}" class="form-control" />
+			<input type="submit" value="Save" class="btn btn-success"></input>
+		</form>
+	</div>
+	</div>
+
+</body>
+</html>
