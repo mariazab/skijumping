@@ -20,13 +20,13 @@ public class SkijumpingApplication {
 		return (args) -> {
 			
 			//Create and save athletes
-			Athlete kStoch = new Athlete("Kamil", "Stoch", "Poland", 1987);
+			/*Athlete kStoch = new Athlete("Kamil", "Stoch", "Poland", 1987);
 			Athlete rFreitag = new Athlete("Richard", "Freitag", "Germany", 1991);
 			Athlete rJohansson = new Athlete("Robert", "Johansson", "Norway", 1990);
 			
 			repository.save(kStoch);
 			repository.save(rFreitag);
-			repository.save(rJohansson);
+			repository.save(rJohansson);*/
 			
 		};
 	}

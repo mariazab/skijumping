@@ -13,6 +13,7 @@ public class Athlete {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private long id;
 	
 	@Column(name = "firstname")
@@ -35,6 +36,15 @@ public class Athlete {
 		this.lastName = lastName;
 		this.nationality = nationality;
 		this.birthYear = birthYear;
+	}
+
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {

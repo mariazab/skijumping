@@ -2,14 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Add athlete</title>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+	<title>Edit athlete</title>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
 </head>
 <body>
-	<h1>Add athlete</h1>
+	<h1>Edit athlete</h1>
 	<div class="container">
 	<div class="form-group">
-		<form th:object="${athlete}" th:action="@{saveAthlete}" action="#" method="post">
+		<form th:object="${athlete}" th:action="@{../saveAthlete}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" />
 			<label for="firstName">First name</label>
 			<input type="text" id="firstName" th:field="*{firstName}" class="form-control" />
 			<label for="lastName">Last name</label>
