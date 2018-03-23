@@ -9,6 +9,8 @@
 <body>
 	<div class="container">
 	<h2>Athletes</h2>
+	<a class="btn btn-outline-warning" th:href="@{/addAthlete}">Add Athlete</a>
+	<a class="btn btn-dark" th:href="@{../dashboard}">Dashboard</a>
 	<table class="table">
 		<thead class="table-info">
 			<tr>
@@ -24,12 +26,11 @@
 				<td th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
 				<td th:text="${athlete.nationality}"></td>
 				<td th:text="${athlete.birthYear}"></td>
-				<td><a class="btn btn-sm btn-info" th:href="@{/edit/{id}(id=${athlete.id})}">Edit</a></td>
-				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/delete/{id}(id=${athlete.id})}">Delete</a></td>
+				<td><a class="btn btn-sm btn-info" th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
+				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>
-	<a class="btn btn-outline-warning" th:href="@{/addAthlete}">Add Athlete</a>
 	</div>
 
 </body>

@@ -41,14 +41,14 @@ public class AthleteController {
 	}
 	
 	// Delete athlete
-	@RequestMapping("/delete/{id}")
+	@RequestMapping("/deleteAthlete/{id}")
 	public String deleteAthlete(@PathVariable("id") Long athleteId, Model model) {
 		repository.delete(athleteId);
 		return "redirect:../athletes";
 	}
 	
 	// Edit athlete
-	@RequestMapping("/edit/{id}") 
+	@RequestMapping("/editAthlete/{id}") 
 	public String editAthlete(@PathVariable("id") Long athleteId, Model model) {
 		model.addAttribute("athlete", repository.findOne(athleteId));
 		return "editAthlete";

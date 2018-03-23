@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Edit hill</title>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<h1>Edit hill</h1>
+	<div class="container">
+	<div class="form-group">
+		<form th:object="${hill}" th:action="@{../saveHill}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<label for="name">Name</label>
+			<input type="text" id="name" th:field="*{name}" class="form-control" />
+			<label for="country">Country</label>
+			<input type="text" id="country" th:field="*{country}" class="form-control" />
+			<label for="country">City</label>
+			<input type="text" id="city" th:field="*{city}" class="form-control" />
+			<label for="hsPoint">HS</label>
+			<input type="text" id="hsPoint" th:field="*{hsPoint}" class="form-control" />
+			<label for="kPoint">K-Point</label>
+			<input type="text" id="kPoint" th:field="*{kPoint}" class="form-control" />
+			<label for="buildYear">Year of build</label>
+			<input type="text" id="buildYear" th:field="*{buildYear}" class="form-control" />
+			<input type="submit" value="Save" class="btn btn-success"></input>
+		</form>
+	</div>
+	</div>
+
+</body>
+</html>

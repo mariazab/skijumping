@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class SkiJumpingController {
 	
-	@RequestMapping(value="/index", method=RequestMethod.GET)
+	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public String skijumping(Model model) {
-          return "index";
+          return "dashboard";
     }
 	
+	@RequestMapping(value="/index", method=RequestMethod.GET)
+	public String skijumpingIndex(Model model) {
+          return "dashboard";
+    }
 
 }
