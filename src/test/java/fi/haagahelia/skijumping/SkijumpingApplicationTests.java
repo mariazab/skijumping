@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import fi.haagahelia.skijumping.web.AthleteController;
+import fi.haagahelia.skijumping.web.HillController;
 
 
 @RunWith(SpringRunner.class)
@@ -17,9 +18,13 @@ public class SkijumpingApplicationTests {
 	@Autowired
 	AthleteController athleteController;
 	
+	@Autowired 
+	HillController hillController;
+	
 	@Test
 	public void contextLoads() {
 		assertThat(athleteController).isNotNull();
+		assertThat(hillController).isNotNull();
 	}
 
 }
