@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fi.haagahelia.skijumping.domain.AthleteRepository;
 import fi.haagahelia.skijumping.domain.Hill;
+import fi.haagahelia.skijumping.domain.HillRecord;
+import fi.haagahelia.skijumping.domain.HillRecordRepository;
 import fi.haagahelia.skijumping.domain.HillRepository;
 
 @Controller
@@ -19,10 +22,15 @@ public class HillController {
 	@Autowired
 	HillRepository repository;
 	
-	// Showing all hills
+	@Autowired HillRecordRepository recordRepository;
+	
+	@Autowired AthleteRepository athleteRepository;
+	
+	// Showing all hills with records
 	@RequestMapping("/hills")
 	public String showHills(Model model) {
 		model.addAttribute("hills", repository.findAll());
+		/*model.addAttribute("records", recordRepository.findAll());*/
 		return "hills";
 	}
 	
@@ -33,10 +41,26 @@ public class HillController {
 		return "addHill";
 	}
 	
+	// Adding new record
+	@RequestMapping("/addRecord")
+	public String addRecord(Model model) {
+		model.addAttribute("record", new HillRecord());
+		model.addAttribute("hills", repository.findAll());
+		model.addAttribute("athletes", athleteRepository.findAll());
+		return "addRecord";
+	}
+	
 	// Saving new hill
 	@RequestMapping("/saveHill")
 	public String saveHill(Hill hill) {
 		repository.save(hill);
+		return "redirect:hills";
+	}
+	
+	//Saving new record
+	@RequestMapping("/saveRecord") 
+	public String saveRecord(HillRecord hillRecord) {
+		recordRepository.save(hillRecord);
 		return "redirect:hills";
 	}
 	
@@ -46,11 +70,28 @@ public class HillController {
 		model.addAttribute("hill", repository.findOne(hillId));
 		return "editHill";
 	}
+	
+	// Editing record
+	@RequestMapping("/editRecord/{id}")
+	public String editRecord(@PathVariable("id") Long recordId, Model model) {
+		model.addAttribute("record", recordRepository.findOne(recordId));
+		model.addAttribute("hills", repository.findAll());
+		model.addAttribute("athletes", athleteRepository.findAll());
+		return "editRecord";
+	}
 
-	// Delete hill
+	// Deleting hill
 	@RequestMapping("/deleteHill/{id}")
 	public String deleteHill(@PathVariable("id") Long hillId, Model model) {
 		repository.delete(hillId);
+		return "redirect:../hills";
+	}
+	
+	// Deleting record
+	@RequestMapping("/deleteRecord/{id}")
+	public String deleteRecord(@PathVariable("id") Long recordId, Model model) {
+		System.out.println("Deleting record... " + recordId);
+		recordRepository.delete(recordId);
 		return "redirect:../hills";
 	}
 	

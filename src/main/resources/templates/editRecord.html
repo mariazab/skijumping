@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Edit hill record</title>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<h1>Edit hill</h1>
+	<div class="container">
+	<div class="form-group">
+		<form th:object="${record}" th:action="@{../saveRecord}" action="#" method="post">
+		<input type="hidden" th:field="*{id}" />
+			<label for="hillList">Hill</label>
+			<select id="hilllist" th:field="*{hill}" class="form-control">
+				<option th:each="hill: ${hills}"
+						th:value="${hill.id}"
+						th:text="${hill.name}"></option>
+			</select>
+			<label for="athleteList">Athlete</label>
+			<select id="athleteList" th:field="*{athlete}" class="form-control">
+				<option th:each="athlete: ${athletes}"
+						th:value="${athlete.id}"
+						th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
+			</select>
+			<label for="length">Length</label>
+			<input type="text" id="length" th:field="*{length}" class="form-control" />
+			<label for="year">Year</label>
+			<input type="text" id="year" th:field="*{year}" class="form-control" />
+			<input type="submit" value="Save" class="btn btn-success"></input>
+		</form>
+	</div>
+	</div>
+
+</body>
+</html>

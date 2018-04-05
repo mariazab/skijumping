@@ -40,7 +40,7 @@ public class AthleteController {
 		return "redirect:athletes";
 	}
 	
-	// Delete athlete
+	// Deleting athlete
 	@RequestMapping("/deleteAthlete/{id}")
 	public String deleteAthlete(@PathVariable("id") Long athleteId, Model model) {
 		repository.delete(athleteId);

@@ -14,6 +14,7 @@
 	<table class="table">
 		<thead class="table-info">
 			<tr>
+				<th>ID</th>
 				<th>Name</th>
 				<th>Nationality</th>
 				<th>Birth year</th>
@@ -23,6 +24,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="athlete: ${athletes}">
+				<td th:text="${athlete.id}"></td>
 				<td th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
 				<td th:text="${athlete.nationality}"></td>
 				<td th:text="${athlete.birthYear}"></td>

@@ -1,11 +1,15 @@
 package fi.haagahelia.skijumping.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table (name = "hill")
@@ -34,10 +38,25 @@ public class Hill {
 	@Column(name = "buildyear")
 	private int buildYear;
 
+	@OneToOne (cascade = CascadeType.ALL,mappedBy = "hill")
+	@JoinColumn(name = "hillrecordID")
+	private HillRecord hillRecord;
 	
 	public Hill() {
 	}
 
+	public Hill(String name, String country, String city, int hsPoint, int kPoint, int buildYear, HillRecord hillRecord) {
+		super();
+		this.name = name;
+		this.country = country;
+		this.city = city;
+		this.hsPoint = hsPoint;
+		this.kPoint = kPoint;
+		this.buildYear = buildYear;
+		this.hillRecord = hillRecord;
+	}
+	
+	
 	public Hill(String name, String country, String city, int hsPoint, int kPoint, int buildYear) {
 		super();
 		this.name = name;
@@ -103,5 +122,14 @@ public class Hill {
 	public void setBuildYear(int buildYear) {
 		this.buildYear = buildYear;
 	}
+
+	public HillRecord getHillRecord() {
+		return hillRecord;
+	}
+
+	public void setHillRecord(HillRecord hillRecord) {
+		this.hillRecord = hillRecord;
+	}
+	
 	
 }

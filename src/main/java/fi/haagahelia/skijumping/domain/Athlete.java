@@ -1,10 +1,14 @@
 package fi.haagahelia.skijumping.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +31,9 @@ public class Athlete {
 	
 	@Column(name = "birthyear")
 	private int birthYear;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "athlete")
+	private List<HillRecord> hillRecord;
 		
 	public Athlete() {
 	}
@@ -77,6 +84,14 @@ public class Athlete {
 
 	public void setBirthYear(int birthYear) {
 		this.birthYear = birthYear;
+	}
+
+	public List<HillRecord> getHillRecord() {
+		return hillRecord;
+	}
+
+	public void setHillRecord(List<HillRecord> hillRecord) {
+		this.hillRecord = hillRecord;
 	}
 	
 	
