@@ -90,7 +90,13 @@ public class HillController {
 	// Deleting record
 	@RequestMapping("/deleteRecord/{id}")
 	public String deleteRecord(@PathVariable("id") Long recordId, Model model) {
-		System.out.println("Deleting record... " + recordId);
+		//Finding the hill with the record no. recordId
+		Hill hill = (recordRepository.findOne(recordId)).getHill();
+		
+		//Setting the record to be null
+		hill.setHillRecord(null);
+		
+		//Deleting record
 		recordRepository.delete(recordId);
 		return "redirect:../hills";
 	}
@@ -102,8 +108,20 @@ public class HillController {
 	}
 	
 	//RESTful service to get hill by id
-		@RequestMapping(value="/hillsApi/{id}", method=RequestMethod.GET)
-		public @ResponseBody Hill findHillRest(@PathVariable("id") Long hillId) {
-			return repository.findOne(hillId);
-		}
+	@RequestMapping(value="/hillsApi/{id}", method=RequestMethod.GET)
+	public @ResponseBody Hill findHillRest(@PathVariable("id") Long hillId) {
+		return repository.findOne(hillId);
+	}
+	
+	//RESTful service to get all hill records
+	@RequestMapping(value="/hillRecordsApi", method=RequestMethod.GET)
+	public @ResponseBody List<HillRecord> hillRecordListRest() {
+		return (List<HillRecord>) recordRepository.findAll();
+	}
+	
+	//RESTful service to get hill records by Id
+	@RequestMapping(value="/hillRecordsApi/{id}", method=RequestMethod.GET)
+	public @ResponseBody HillRecord findRecordRest(@PathVariable("id") Long recordId) {
+		return recordRepository.findOne(recordId);		
+	}
 }

@@ -23,6 +23,7 @@ public class HillRecord {
 	private long id;
 	
 	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name = "hill_id")
 	private Hill hill;
 	

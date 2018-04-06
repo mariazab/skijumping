@@ -14,7 +14,7 @@
 			<select id="hilllist" th:field="*{hill}" class="form-control">
 				<option th:each="hill: ${hills}"
 						th:value="${hill.id}"
-						th:text="${hill.name}"></option>
+						th:text="${hill.name + ', ' + hill.city}"></option>
 			</select>
 			<label for="athleteList">Athlete</label>
 			<select id="athleteList" th:field="*{athlete}" class="form-control">

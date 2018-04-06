@@ -37,10 +37,13 @@
 				<td th:text="${hill.kPoint + ' m'}"></td>
 				<td th:text="${hill.buildYear}"></td>
 				<td th:if="${hill.hillRecord != null}" th:text="${hill.hillRecord.athlete.firstName + ' ' + hill.hillRecord.athlete.lastName.toUpperCase() + ', ' + hill.hillRecord.length + 'm in ' + hill.hillRecord.year}"></td>
+				<td th:unless="${hill.hillRecord != null}"></td>
 				<td><a class="btn btn-sm btn-info" th:href="@{/editHill/{id}(id=${hill.id})}">Edit Hill</a></td>
-				<td th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-info" th:href="@{/editRecord/{id}(id=${hill.hillRecord.id})}">Edit Record</a></td>
 				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteHill/{id}(id=${hill.id})}">Delete Hill</a></td>
+				<td th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-info" th:href="@{/editRecord/{id}(id=${hill.hillRecord.id})}">Edit Record</a></td>
+				<td th:unless="${hill.hillRecord != null}"></td>
 				<td th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteRecord/{id}(id=${hill.hillRecord.id})}">Delete Record</a></td>
+				<td th:unless="${hill.hillRecord != null}"></td>
 			</tr>
 		</tbody>
 	</table>
