@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface HillRecordRepository extends CrudRepository<HillRecord, Long> {
 
-	HillRecord findByHillId(int hillId);
+	HillRecord findByHillId(Long hillId);
 }
