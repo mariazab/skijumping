@@ -66,15 +66,19 @@ public class HillRepositoryTest {
 	//Test finding hill record by hill id
 	@Test
 	public void findByHillId() {
+		//Creating and saving new hill
 		Hill hill = new Hill("Skocznia", "USA", "LA", 123, 120, 1988);
 		repository.save(hill);
 		
+		//Creating and saving new athlete
 		Athlete athlete = new Athlete("Adam", "Malysz", "Poland", 1977);
 		athleteRepository.save(athlete);
 		
+		//Creating and saving new record
 		HillRecord newRecord = new HillRecord(hill, athlete, 120, 2000);
 		recordRepository.save(newRecord);
 		
+		//Finding record by hill id
 		HillRecord record = recordRepository.findByHillId(hill.getId());
 		assertThat(record.getLength()).isEqualTo(120);
 	}

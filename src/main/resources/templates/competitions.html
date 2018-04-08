@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Calendar</title>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+	<h2>Calendar</h2>
+	<a class="btn btn-outline-warning" th:href="@{/addCompetition}">Add Competition</a>
+	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
+	<table class="table">
+		<thead class="table-info">
+			<tr>
+				<th>ID</th>
+				<th>Hill</th>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Type</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="competition: ${competitions}">
+				<td th:text="${competition.id}"></td>
+				<td th:text="${competition.hill.city + ' HS' + competition.hill.hsPoint}"></td>
+				<th:block th:switch="${competition.date.getMonth()}">
+					<td th:case="0" th:text="${competition.date.getDate() + ' Jan ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="1" th:text="${competition.date.getDate() + ' Feb ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="2" th:text="${competition.date.getDate() + ' Mar ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="3" th:text="${competition.date.getDate() + ' Apr ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="4" th:text="${competition.date.getDate() + ' May ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="5" th:text="${competition.date.getDate() + ' Jun ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="6" th:text="${competition.date.getDate() + ' Jul ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="7" th:text="${competition.date.getDate() + ' Aug ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="8" th:text="${competition.date.getDate() + ' Sep ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="9" th:text="${competition.date.getDate() + ' Oct ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="10" th:text="${competition.date.getDate() + ' Nov ' + (competition.date.getYear() + 1900)}"></td>
+					<td th:case="11" th:text="${competition.date.getDate() + ' Dec ' + (competition.date.getYear() + 1900)}"></td>
+				</th:block>
+				<td th:text="${competition.time.substring(0, 5)}"></td>
+				<td th:text="${competition.type}"></td>
+				<td><a class="btn btn-sm btn-info" th:href="@{/editCompetition/{id}(id=${competition.id})}">Edit</a></td>
+				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteCompetition/{id}(id=${competition.id})}">Delete</a></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+</body>
+</html>
