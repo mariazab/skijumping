@@ -21,6 +21,7 @@
 				<th>Type</th>
 				<th></th>
 				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -45,7 +46,7 @@
 				<td th:text="${competition.type}"></td>
 				<td><a class="btn btn-sm btn-info" th:href="@{/editCompetition/{id}(id=${competition.id})}">Edit</a></td>
 				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteCompetition/{id}(id=${competition.id})}">Delete</a></td>
-				<td></td>
+				<td><a class="btn btn-sm btn-outline-info" th:href="@{/results/{id}(id=${competition.id})}">Results</a></td>
 			</tr>
 		</tbody>
 	</table>

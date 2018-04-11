@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Add results</title>
+	<link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" th:href="@{../../css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<h2 th:text="${'Add results for ' + competition.hill.city + ' HS' + competition.hill.hsPoint + ' ' + competition.type}">Add results</h2>
+	<div class="container">
+	<div class="form-group">
+	<form th:object="${result}" th:action="@{/saveResult}" action="#" method="post">
+			<label for="competitionList">competition</label>
+			<input type="text" th:field="*{competition}" class="form-control"/>
+			<!-- <select id="ompetitionList" th:field="*{competition}" class="form-control">
+				<option th:each="competition: ${competitions}"
+						th:value="${competition.id}"
+						th:text="${competition.hill.city + ', ' + competition.type}"></option>
+			</select> -->
+			<label for="athleteList">Athlete</label>
+			<select id="athleteList" th:field="*{athlete}" class="form-control">
+				<option th:each="athlete: ${athletes}"
+						th:value="${athlete.id}"
+						th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
+			</select>
+			<label for="jump1">Jump 1</label>
+			<input type="text" id="jump1" th:field="*{jump1}" class="form-control" />
+			<label for="jump2">Jump 2</label>
+			<input type="text" id="jump2" th:field="*{jump2}" class="form-control" />
+			<label for="points">Points</label>
+			<input type="text" id="points" th:field="*{points}" class="form-control" />
+			<label for="position">place</label>
+			<input type="text" id="position" th:field="*{wcPoint.position}" class="form-control" />
+			<!-- <table class="table">
+		<thead class="table-info">
+			<tr>
+				<th></th>
+				<th>Place</th>
+				<th>Athlete</th>
+				<th>Jump 1</th>
+				<th>Jump 2</th>
+				<th>Points</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="text" th:field="*{competition.id}" class="form-control"/></td>
+				<td><input type="number" id="postition" th:field="*{wcPoint.position}" class="form-control" /></td>
+				<td><input list="athleteList" class="form-control" th:field="*{athlete}"/><datalist id="athleteList">
+					<option th:each="athlete: ${athletes}"
+							th:value="${athlete.id}"
+							th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
+					</datalist></td>
+				<td><input type="text" id="jump1" th:field="*{jump1}" class="form-control" /></td>
+				<td><input type="text" id="jump2" th:field="*{jump2}" class="form-control" /></td>
+				<td><input type="text" id="points" th:field="*{points}" class="form-control" /></td>
+			</tr>
+		</tbody>
+		</table> -->
+		<input type="submit" value="Save" class="btn btn-success"></input>
+		
+		</form>
+	</div>
+	</div>
+
+</body>
+</html>

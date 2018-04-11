@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "athlete")
@@ -34,6 +35,12 @@ public class Athlete {
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "athlete")
 	private List<HillRecord> hillRecord;
+	
+	@OneToMany (cascade = CascadeType.ALL,mappedBy = "athlete")
+	private List<Result2018> results2018;
+	
+	@OneToOne (cascade = CascadeType.ALL,mappedBy = "athlete")
+	private WcStanding2018 wcStanding2018;
 		
 	public Athlete() {
 	}

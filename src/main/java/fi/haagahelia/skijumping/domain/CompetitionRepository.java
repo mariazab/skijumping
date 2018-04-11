@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CompetitionRepository extends CrudRepository<Competition, Long> {
 
-	List<Competition> findByHillId(Long hillId);
+	List<Competition> findByHillId(long hillId);
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Results</title>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+	<h2 th:text="${'Results ' + competition.hill.city + ' HS' + competition.hill.hsPoint + ' ' + competition.type}">Results</h2>
+	<a class="btn btn-outline-warning" th:href="@{/addResult/{id}(id=${competition.id})}">Add results</a>
+	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
+	<table class="table">
+		<thead class="table-info">
+			<tr>
+				<th>Place</th>
+				<th>Athlete</th>
+				<th>Nation</th>
+				<th>Jump 1</th>
+				<th>Jump 2</th>
+				<th>Points</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="result: ${results}">
+				<td th:text="${result.wcPoint.position}"></td>
+				<td th:text="${result.athlete.firstName + ' ' + result.athlete.lastName.toUpperCase()}"></td>
+				<td th:text="${result.athlete.nationality}"></td>
+				<td th:text="${result.jump1 + 'm'}"></td>
+				<td th:if="${result.jump2 != null}" th:text="${result.jump2 + 'm'}"></td>
+				<td th:unless="${result.jump2 != null}"></td>
+				<td th:text="${result.points}"></td>
+				<td><a class="btn btn-info" th:href="@{/editResult/{id}(id=${result.id})}">Edit result</a></td>
+				<td><a class="btn btn-outline-danger" th:href="@{/deleteResult/{id}(id=${result.id})}">Delete result</a></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+</body>
+</html>
