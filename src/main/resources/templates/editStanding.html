@@ -2,28 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Edit result</title>
+	<title>Edit standing</title>
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
 </head>
 <body>
-	<h2 th:text="${'Edit result for ' + result.competition.hill.city + ' HS' + result.competition.hill.hsPoint + ' ' + result.competition.type}">Edit result</h2>
+	<h2>Edit standing</h2>
 	<div class="container">
 	<div class="form-group">
-		<form th:object="${result}" th:action="@{../saveEditResult}" action="#" method="post">
+		<form th:object="${standing}" th:action="@{../saveStanding}" action="#" method="post">
 			<input type="hidden" th:field="*{id}" />
-			<input type="hidden" th:field="*{competition.id}" />
-			<label for="position">Place</label>
-			<input type="number" id="postition" th:field="*{wcPoint.position}" class="form-control" />
 			<label for="athleteList">Athlete</label>
 			<input list="athleteList" class="form-control" th:field="*{athlete}"/><datalist id="athleteList">
 				<option th:each="athlete: ${athletes}"
 						th:value="${athlete.id}"
 						th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
 				</datalist>
-			<label for="jump1">Jump 1</label>
-			<input type="text" id="jump1" th:field="*{jump1}" class="form-control" />
-			<label for="jump2">Jump 2</label>
-			<input type="text" id="jump2" th:field="*{jump2}" class="form-control" />
 			<label for="points">Points</label>
 			<input type="text" id="points" th:field="*{points}" class="form-control" />
 			<input type="submit" value="Save" class="btn btn-success"></input>

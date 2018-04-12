@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import fi.haagahelia.skijumping.web.AthleteController;
 import fi.haagahelia.skijumping.web.CompetitionController;
 import fi.haagahelia.skijumping.web.HillController;
+import fi.haagahelia.skijumping.web.WcStandingController;
 
 
 @RunWith(SpringRunner.class)
@@ -25,11 +26,15 @@ public class SkijumpingApplicationTests {
 	@Autowired
 	CompetitionController competitionController;
 	
+	@Autowired
+	WcStandingController standingController;
+	
 	@Test
 	public void contextLoads() {
 		assertThat(athleteController).isNotNull();
 		assertThat(hillController).isNotNull();
 		assertThat(competitionController).isNotNull();
+		assertThat(standingController).isNotNull();
 	}
 
 }

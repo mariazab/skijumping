@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.skijumping.domain.Athlete;
 import fi.haagahelia.skijumping.domain.AthleteRepository;
+import fi.haagahelia.skijumping.domain.WcStanding2018;
+import fi.haagahelia.skijumping.domain.WcStanding2018Repository;
 
 @Controller
 public class AthleteController {
 
 	@Autowired
 	AthleteRepository repository;
+	
+	@Autowired
+	WcStanding2018Repository wcStandingRepository;
 	
 	// Showing all athletes
 	@RequestMapping(value="/athletes", method=RequestMethod.GET)
@@ -37,6 +42,7 @@ public class AthleteController {
 	@RequestMapping("/saveAthlete")
 	public String saveAthlete(Athlete athlete) {
 		repository.save(athlete);
+		/*createStanding(athlete);*/
 		return "redirect:athletes";
 	}
 	
@@ -66,4 +72,13 @@ public class AthleteController {
 		return repository.findOne(athleteId);
 	}
 	
+	//Create Standing for new athletes
+	/*public void createStanding(Athlete athlete) {
+		try {
+			WcStanding2018 standing = new WcStanding2018(athlete, 0);
+			wcStandingRepository.save(standing);
+			System.out.println(standing);
+		} catch() {
+		
+	}*/
 }

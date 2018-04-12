@@ -10,6 +10,7 @@
 	<div class="container">
 	<h2 th:text="${'Results ' + competition.hill.city + ' HS' + competition.hill.hsPoint + ' ' + competition.type}">Results</h2>
 	<a class="btn btn-outline-warning" th:href="@{/addResult/{id}(id=${competition.id})}">Add results</a>
+	<a class="btn btn-dark" th:href="@{../competitions}">Back to Calendar</a>
 	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
 	<table class="table">
 		<thead class="table-info">

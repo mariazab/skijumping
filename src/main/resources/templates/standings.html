@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>World Cup Standings 2018</title>
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+	<h2>World Cup Standings 2018</h2>
+	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
+	<table class="table">
+		<thead class="table-info">
+			<tr>
+				<th>Place</th>
+				<th>Athlete</th>
+				<th>Nation</th>
+				<th>Points</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody th:with="i=0">
+			<tr th:each="standing, iterator: ${standings}" >
+				<td th:text="${iterator.index + 1}"></td>
+				<td th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName.toUpperCase()}"></td>
+				<td th:text="${standing.athlete.nationality}"></td>
+				<td th:text="${standing.points}"></td>
+				<td><a class="btn btn-info" th:href="@{/editStanding/{id}(id=${standing.id})}">Edit standing</a></td>
+				<td><a class="btn btn-outline-danger" th:href="@{/deleteStanding/{id}(id=${standing.id})}">Delete standing</a></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+</body>
+</html>
