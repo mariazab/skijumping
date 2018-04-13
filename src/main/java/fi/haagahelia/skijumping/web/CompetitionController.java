@@ -76,7 +76,14 @@ public class CompetitionController {
 	// Adding new results for a competition
 	@RequestMapping("/addResult/{competitionId}")
 	public String addResult(@PathVariable("competitionId") Long competitionId, Model model) {
+		/*ArrayList<Result2018> results = new ArrayList<Result2018>();
+		for(int i = 0; i < 5; i++) {
+			Result2018 result = new Result2018();
+			results.add(result);
+		}
+		System.out.println(results);*/
 		model.addAttribute("result", new Result2018());
+		//model.addAttribute("results", results);
 		model.addAttribute("wcpoints", wcPointRepository.findAll());
 		model.addAttribute("athletes", athleteRepository.findAll());
 		model.addAttribute("competition", repository.findOne(competitionId));
@@ -146,24 +153,22 @@ public class CompetitionController {
 		if(result2018.getCompetition().getType().equals("Individual")) {
 			// Finding the corresponding athlete
 			Athlete athlete = athleteRepository.findOne(result2018.getAthlete().getId());
-			System.out.println(athlete);
+
 			//Getting the points to add to standings
 			WcPoint wcPoint = wcPointRepository.findByPosition(result2018.getWcPoint().getPosition());
 			int points = wcPoint.getPoints();
-			System.out.println(points);
-			//Finding the WcStanding with the athlete
 			
 			try {
 				//Update the points of the athlete
 				WcStanding2018 wcStanding = wcStandingRepository.findByAthleteId(athlete.getId());
 				wcStanding.setPoints(wcStanding.getPoints() + points);
-				System.out.println(wcStanding.getPoints());
+				//System.out.println(wcStanding.getPoints());
 				wcStandingRepository.save(wcStanding);
 			} catch (NullPointerException e) {
 				//If the wcStanding does not exits, then create the standing for the athlete
 				WcStanding2018 standing = new WcStanding2018(athlete, points);
 				wcStandingRepository.save(standing);
-				System.out.println(standing);
+				//System.out.println(standing);
 			}
 		}
 		

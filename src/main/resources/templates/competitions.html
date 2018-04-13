@@ -9,24 +9,24 @@
 <body>
 	<div class="container">
 	<h2>Calendar</h2>
-	<a class="btn btn-outline-warning" th:href="@{/addCompetition}">Add Competition</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addCompetition}">Add Competition</a>
 	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
 	<table class="table">
 		<thead class="table-info">
 			<tr>
-				<th>ID</th>
+				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
 				<th>Hill</th>
 				<th>Date</th>
 				<th>Time</th>
 				<th>Type</th>
-				<th></th>
-				<th></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="competition: ${competitions}">
-				<td th:text="${competition.id}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:text="${competition.id}"></td>
 				<td th:text="${competition.hill.city + ' HS' + competition.hill.hsPoint}"></td>
 				<th:block th:switch="${competition.date.getMonth()}">
 					<td th:case="0" th:text="${competition.date.getDate() + ' Jan ' + (competition.date.getYear() + 1900)}"></td>
@@ -44,8 +44,8 @@
 				</th:block>
 				<td th:text="${competition.time.substring(0, 5)}"></td>
 				<td th:text="${competition.type}"></td>
-				<td><a class="btn btn-sm btn-info" th:href="@{/editCompetition/{id}(id=${competition.id})}">Edit</a></td>
-				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteCompetition/{id}(id=${competition.id})}">Delete</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-info" th:href="@{/editCompetition/{id}(id=${competition.id})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteCompetition/{id}(id=${competition.id})}">Delete</a></td>
 				<td><a class="btn btn-sm btn-outline-info" th:href="@{/results/{id}(id=${competition.id})}">Results</a></td>
 			</tr>
 		</tbody>

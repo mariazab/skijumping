@@ -12,17 +12,17 @@
 		<form th:object="${record}" th:action="@{../saveRecord}" action="#" method="post">
 		<input type="hidden" th:field="*{id}" />
 			<label for="hillList">Hill</label>
-			<select id="hilllist" th:field="*{hill}" class="form-control">
+			<input list="hilllist" th:field="*{hill}" class="form-control" /><datalist id="hillList">
 				<option th:each="hill: ${hills}"
 						th:value="${hill.id}"
 						th:text="${hill.name}"></option>
-			</select>
+			</datalist>
 			<label for="athleteList">Athlete</label>
-			<select id="athleteList" th:field="*{athlete}" class="form-control">
+			<input list="athleteList" th:field="*{athlete}" class="form-control" /><datalist id="athleteList">
 				<option th:each="athlete: ${athletes}"
 						th:value="${athlete.id}"
 						th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
-			</select>
+			</datalist>
 			<label for="length">Length</label>
 			<input type="text" id="length" th:field="*{length}" class="form-control" />
 			<label for="year">Year</label>

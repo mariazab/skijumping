@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.skijumping.domain.Athlete;
 import fi.haagahelia.skijumping.domain.AthleteRepository;
-import fi.haagahelia.skijumping.domain.WcStanding2018;
 import fi.haagahelia.skijumping.domain.WcStanding2018Repository;
 
 @Controller
@@ -72,13 +71,4 @@ public class AthleteController {
 		return repository.findOne(athleteId);
 	}
 	
-	//Create Standing for new athletes
-	/*public void createStanding(Athlete athlete) {
-		try {
-			WcStanding2018 standing = new WcStanding2018(athlete, 0);
-			wcStandingRepository.save(standing);
-			System.out.println(standing);
-		} catch() {
-		
-	}*/
 }

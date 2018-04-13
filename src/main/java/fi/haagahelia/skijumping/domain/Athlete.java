@@ -39,7 +39,7 @@ public class Athlete {
 	@OneToMany (cascade = CascadeType.ALL,mappedBy = "athlete")
 	private List<Result2018> results2018;
 	
-	@OneToOne (cascade = CascadeType.ALL,mappedBy = "athlete")
+	@OneToOne (cascade = CascadeType.DETACH,mappedBy = "athlete")
 	private WcStanding2018 wcStanding2018;
 		
 	public Athlete() {

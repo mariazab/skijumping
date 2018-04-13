@@ -39,24 +39,23 @@ public class WcStandingController {
 	
 	// Editing standing
 	@RequestMapping("/editStanding/{id}")
-		public String editCompetition(@PathVariable("id") Long standingId, Model model) {
-			model.addAttribute("standing", repository.findOne(standingId));
-			model.addAttribute("athletes", athleteRepository.findAll());
-			return "editStanding";
-		}
+	public String editCompetition(@PathVariable("id") Long standingId, Model model) {
+		model.addAttribute("standing", repository.findOne(standingId));
+		model.addAttribute("athletes", athleteRepository.findAll());
+		return "editStanding";
+	}
 	
 	//Deleting standing
 	@RequestMapping("/deleteStanding/{id}")
 	public String deleteStanding(@PathVariable("id") Long standingId, Model model) {
 		WcStanding2018 standing = repository.findOne(standingId);
 		repository.delete(standing);
-		System.out.println(standingId);
 		return "redirect:../standings";
 	}
 	
 	// RESTful service to get standings
-		@RequestMapping(value="/standingsApi", method=RequestMethod.GET)
-		public @ResponseBody List<WcStanding2018> standingsListRest() {
-			return (List<WcStanding2018>) repository.findAll();
-		}
+	@RequestMapping(value="/standingsApi", method=RequestMethod.GET)
+	public @ResponseBody List<WcStanding2018> standingsListRest() {
+		return (List<WcStanding2018>) repository.findAll();
+	}
 }

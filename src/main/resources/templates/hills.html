@@ -9,13 +9,13 @@
 <body>
 	<div class="container">
 	<h2>Hills</h2>
-	<a class="btn btn-outline-warning" th:href="@{/addHill}">Add Hill</a>
-	<a class="btn btn-outline-warning" th:href="@{/addRecord}">Add Hill Record</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addHill}">Add Hill</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addRecord}">Add Hill Record</a>
 	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
 	<table class="table">
-		<thead class="table-secondary">
+		<thead class="table-info">
 			<tr>
-				<th>ID</th>
+				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
 				<th>Name</th>
 				<th>Location</th>
 				<th>Hill Size</th>
@@ -23,14 +23,14 @@
 				<th>Built in</th>
 				<th>Record</th>
 				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="hill: ${hills}">
-				<td th:text="${hill.id}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:text="${hill.id}"></td>
 				<td th:text="${hill.name}"></td>
 				<td th:text="${hill.city + ', ' + hill.country}"></td>
 				<td th:text="${hill.hsPoint + ' m'}"></td>
@@ -38,12 +38,12 @@
 				<td th:text="${hill.buildYear}"></td>
 				<td th:if="${hill.hillRecord != null}" th:text="${hill.hillRecord.athlete.firstName + ' ' + hill.hillRecord.athlete.lastName.toUpperCase() + ', ' + hill.hillRecord.length + 'm in ' + hill.hillRecord.year}"></td>
 				<td th:unless="${hill.hillRecord != null}"></td>
-				<td><a class="btn btn-sm btn-info" th:href="@{/editHill/{id}(id=${hill.id})}">Edit Hill</a></td>
-				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteHill/{id}(id=${hill.id})}">Delete Hill</a></td>
-				<td th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-info" th:href="@{/editRecord/{id}(id=${hill.hillRecord.id})}">Edit Record</a></td>
-				<td th:unless="${hill.hillRecord != null}"></td>
-				<td th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteRecord/{id}(id=${hill.hillRecord.id})}">Delete Record</a></td>
-				<td th:unless="${hill.hillRecord != null}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-info" th:href="@{/editHill/{id}(id=${hill.id})}">Edit Hill</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteHill/{id}(id=${hill.id})}">Delete Hill</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-info" th:href="@{/editRecord/{id}(id=${hill.hillRecord.id})}">Edit Record</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:unless="${hill.hillRecord != null}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:if="${hill.hillRecord != null}"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteRecord/{id}(id=${hill.hillRecord.id})}">Delete Record</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:unless="${hill.hillRecord != null}"></td>
 			</tr>
 		</tbody>
 	</table>

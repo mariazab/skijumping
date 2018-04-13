@@ -1,8 +1,8 @@
 package fi.haagahelia.skijumping;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 
 @SpringBootApplication
 public class SkijumpingApplication {
@@ -12,17 +12,14 @@ public class SkijumpingApplication {
 	}
 	
 	/*@Bean
-	public CommandLineRunner clr(AthleteRepository repository) {
+	public CommandLineRunner clr(UserRepository userRepository) {
 		return (args) -> {
 			
-			Create and save athletes
-			Athlete kStoch = new Athlete("Kamil", "Stoch", "Poland", 1987);
-			Athlete rFreitag = new Athlete("Richard", "Freitag", "Germany", 1991);
-			Athlete rJohansson = new Athlete("Robert", "Johansson", "Norway", 1990);
-			
-			repository.save(kStoch);
-			repository.save(rFreitag);
-			repository.save(rJohansson);
+			//Create users
+			User admin = new User("admin", "", "admin", "admin@bookstore.com", "ADMIN");
+			User user = new User("user", "", "test user", "user@bookstore.com", "USER");
+			userRepository.save(admin);
+			userRepository.save(user);
 			
 		};
 	}*/

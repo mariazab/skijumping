@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 	<title>Athletes</title>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
@@ -9,27 +9,27 @@
 <body>
 	<div class="container">
 	<h2>Athletes</h2>
-	<a class="btn btn-outline-warning" th:href="@{/addAthlete}">Add Athlete</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addAthlete}">Add Athlete</a>
 	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
 	<table class="table">
 		<thead class="table-info">
 			<tr>
-				<th>ID</th>
+				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
 				<th>Name</th>
 				<th>Nationality</th>
 				<th>Birth year</th>
-				<th></th>
-				<th></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="athlete: ${athletes}">
-				<td th:text="${athlete.id}"></td>
+				<td sec:authorize="hasAuthority('ADMIN')" th:text="${athlete.id}"></td>
 				<td th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
 				<td th:text="${athlete.nationality}"></td>
 				<td th:text="${athlete.birthYear}"></td>
-				<td><a class="btn btn-sm btn-info" th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
-				<td><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-info" th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

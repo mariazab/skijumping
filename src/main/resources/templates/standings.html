@@ -17,8 +17,8 @@
 				<th>Athlete</th>
 				<th>Nation</th>
 				<th>Points</th>
-				<th></th>
-				<th></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')"></th>
 			</tr>
 		</thead>
 		<tbody th:with="i=0">
@@ -27,8 +27,8 @@
 				<td th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName.toUpperCase()}"></td>
 				<td th:text="${standing.athlete.nationality}"></td>
 				<td th:text="${standing.points}"></td>
-				<td><a class="btn btn-info" th:href="@{/editStanding/{id}(id=${standing.id})}">Edit standing</a></td>
-				<td><a class="btn btn-outline-danger" th:href="@{/deleteStanding/{id}(id=${standing.id})}">Delete standing</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info" th:href="@{/editStanding/{id}(id=${standing.id})}">Edit standing</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/deleteStanding/{id}(id=${standing.id})}">Delete standing</a></td>
 			</tr>
 		</tbody>
 	</table>

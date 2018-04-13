@@ -6,18 +6,18 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
 </head>
 <body>
-	<h1>Add competition</h1>
+	<h2>Add competition</h2>
 	<div class="container">
 	<div class="form-group">
 		<form th:object="${competition}" th:action="@{saveCompetition}" action="#" method="post">
 			<label for="id">ID</label>
 			<input type="text" id="id" th:field="*{id}" class="form-control" />
 			<label for="hillList">Hill</label>
-			<select id="hillList" th:field="*{hill}" class="form-control">
+			<input list="hillList" th:field="*{hill}" class="form-control" /><datalist id="hillList">
 				<option th:each="hill: ${hills}"
 						th:value="${hill.id}"
 						th:text="${hill.name + ', ' + hill.city}"></option>
-			</select>
+			</datalist>
 			<label for="date">Date</label>
 			<input type="date" id="date" th:field="*{date}" class="form-control" />
 			<label for="time">Time</label>
