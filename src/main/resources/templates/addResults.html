@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h2 th:text="${'Add results for ' + competition.hill.city + ' HS' + competition.hill.hsPoint + ' ' + competition.type + ' (id: ' + competition.id + ')'}">Add results</h2>
-	<div class="container">
+	<div class="container-fluid">
 	<div class="form-group">
 	<form th:object="${result}" th:action="@{/saveResult}" action="#" method="post">
 			<label for="competitionList">competition</label>

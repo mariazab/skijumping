@@ -6,7 +6,7 @@
         <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
     </head>
     <body>
-    	<div class="container">
+    	<div class="container-fluid">
     	<div class="col-md-4 col-md-offset-4"> 
        		<div class="alert alert-danger" th:if="${param.error}">
        			Invalid username and password.
@@ -20,7 +20,7 @@
             <div><label> Password: <input type="password" name="password" class="form-control" /> </label></div>
             <div><input type="submit" value="Sign In" class="btn btn-success" /></div>
        </form>
-       <a th:href="@{/signup}">Signup</a>
+       <a th:href="@{/signup}">Create an account</a>
        </div>
     </body>
 </html>

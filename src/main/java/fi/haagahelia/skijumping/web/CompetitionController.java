@@ -3,6 +3,8 @@ package fi.haagahelia.skijumping.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,8 @@ import fi.haagahelia.skijumping.domain.CompetitionRepository;
 import fi.haagahelia.skijumping.domain.HillRepository;
 import fi.haagahelia.skijumping.domain.Result2018;
 import fi.haagahelia.skijumping.domain.Result2018Repository;
+import fi.haagahelia.skijumping.domain.User;
+import fi.haagahelia.skijumping.domain.UserRepository;
 import fi.haagahelia.skijumping.domain.WcPoint;
 import fi.haagahelia.skijumping.domain.WcPointRepository;
 import fi.haagahelia.skijumping.domain.WcStanding2018;
@@ -43,9 +47,17 @@ public class CompetitionController {
 	@Autowired
 	WcStanding2018Repository wcStandingRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	// Showing all competitions
 	@RequestMapping("/competitions")
 	public String showCompetitions(Model model) {
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userRepository.findByUsername(loggedInUser.getName());
+	    String name = user.getName();
+	    model.addAttribute("name", name);
+		
 		model.addAttribute("competitions", repository.findAll());
 		return "competitions";
 	}

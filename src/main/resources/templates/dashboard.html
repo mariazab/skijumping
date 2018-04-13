@@ -7,9 +7,9 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<div class="container">
-	<h1>Welcome</h1>
-	<form th:action="@{/logout}" method="post">
+	<div class="container-fluid">
+		<h1 th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Log out" class="btn btn-outline-info"/>
 		</form>
 		<a class="btn btn-secondary" href="../athletes" th:href="@{../athletes}">Athletes</a>
@@ -17,7 +17,42 @@
 		<a class="btn btn-secondary" href="../competitions" >Calendar</a>
 		<!--<a class="btn btn-secondary" href="#">Results</a> -->
 		<a class="btn btn-secondary" href="../standings" th:href="@{../standings}">World Cup Standings</a>
-
+	
+		<div class="card-deck">
+			<div class="card" style="width: 18rem;">
+  				<div class="card-body">
+   					<h5 class="card-title">Latest Results</h5>
+    				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    				<p class="card-text">Here the latest results will appear with top 3 and user's fav jumpers. Link to full results, plus maybe an image?</p>
+    				<a href="#" class="card-link">Card link</a>
+    				<!-- <a href="#" class="card-link">Another link</a> -->
+  				</div>
+			</div>
+		
+			<div class="card text-white" style="width: 18rem;">
+				<div class="card-header" style="color:black"><h5>Next competition</h5></div>
+				<img class="card-img-bottom" src="/photos/planica.jpg" alt="Card image" />
+  				<div class="card-img-overlay">
+   					<!-- <h5 class="card-title"></h5> -->
+   					<br /><br />
+    				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    				<p class="card-text">Here information about next competition will appear - hill, hs, k, time date (record)? image or image background!. Button to send email notification.</p>
+    				<a href="#" class="btn-sm btn-primary">Card link</a>
+    				<!-- <a href="#" class="card-link">Another link</a> -->
+  				</div>
+			</div>
+		
+			<div class="card" style="width: 18rem;">
+  				<div class="card-body">
+   					<h5 class="card-title">FIS Facebook or Twitter Feed</h5>
+    				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    				<p class="card-text">Here facebook/twitter feed of FIS will be.</p>
+    				<a href="#" class="card-link">Card link</a>
+    				<!-- <a href="#" class="card-link">Another link</a> -->
+  				</div>
+			</div>
+		</div>
+	
 	</div>
 
 </body>

@@ -7,7 +7,8 @@
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
+	<h1 th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
 	<h2>Hills</h2>
 	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addHill}">Add Hill</a>
 	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addRecord}">Add Hill Record</a>
