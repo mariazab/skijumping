@@ -5,15 +5,51 @@
 <head>
 	<title>Athletes</title>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
 </head>
 <body>
-	<div class="container-fluid">
-	<h1 th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+	
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+	</div>
+		
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<!-- <h2 class="navbar-brand text-white" th:text="${'Welcome, ' + name + '!'}">Welcome</h2> -->
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+   				<ul class="navbar-nav mr-auto">
+      				<li class="nav-item">
+        				<a class="nav-link" href="/dashboard" th:href="@{/dashboard}">Dashboard</a>
+      				</li>
+     				<li class="nav-item active">
+        				<a class="nav-link" href="../athletes" th:href="@{../athletes}">Athletes <span class="sr-only">(current)</span></a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="../competitions" th:href="@{../competitions}">Calendar</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="../standings" th:href="@{../standings}">World Cup Standings</a>
+      				</li>
+    			</ul>
+    			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+      				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log out</button>
+    			</form>
+  			</div>
+		</nav>
+	
+	<div class="container-fluid bg-dark">
+	<div class="card">
+				<div class="card-header">
 	<h2>Athletes</h2>
-	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-warning" th:href="@{/addAthlete}">Add Athlete</a>
-	<a class="btn btn-dark" th:href="@{/dashboard}">Dashboard</a>
-	<table class="table">
-		<thead class="table-info">
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-info" th:href="@{/addAthlete}">Add Athlete</a></div>
+	<table class="table table-hover">
+		<thead class="thead-dark">
 			<tr>
 				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
 				<th>Name</th>
@@ -29,11 +65,12 @@
 				<td th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
 				<td th:text="${athlete.nationality}"></td>
 				<td th:text="${athlete.birthYear}"></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-info" th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-sm btn-outline-danger" th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-info" th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>
+	</div>
 	</div>
 
 </body>

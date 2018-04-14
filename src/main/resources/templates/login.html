@@ -4,10 +4,15 @@
     <head>
         <title>Login Page</title>
         <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+        <link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
     </head>
     <body>
-    	<div class="container-fluid">
-    	<div class="col-md-4 col-md-offset-4"> 
+    	
+    	<div id="login" class="container-fluid">
+    	<h1 id="welcome-login">Welcome to the world of Ski jumping!</h1>
+    	<div id="login-card" class="card">
+				<div class="card-header"><h5>Login</h5></div>
+    	<div> 
        		<div class="alert alert-danger" th:if="${param.error}">
        			Invalid username and password.
        		</div>
@@ -21,6 +26,7 @@
             <div><input type="submit" value="Sign In" class="btn btn-success" /></div>
        </form>
        <a th:href="@{/signup}">Create an account</a>
+       </div>
        </div>
     </body>
 </html>

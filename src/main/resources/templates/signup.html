@@ -4,11 +4,13 @@
     <title>Register</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
 </head>
 <body>
-	<div class="container-fluid">
-		<h1>Register</h1>
-     	<div class="col-md-4">
+	<div id="register" class="container-fluid">
+    	<h1 id="welcome-login">Welcome to the world of Ski jumping!</h1>
+    	<div id="login-card" class="card">
+				<div class="card-header"><h5>Register</h5></div>
 			<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 				<div>
 					<label>Username: <input type="text" th:field="*{username}" class="form-control" /></label>
@@ -34,8 +36,8 @@
 				<input type="submit" class="btn btn-success" value="Register"></input>
 		
 			</form>
-
+			</div>
 		</div>
-	</div>
+
 </body>
 </html>

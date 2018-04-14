@@ -65,6 +65,11 @@ public class CompetitionController {
 	// Showing results for one competition
 	@RequestMapping("/results/{competitionId}")
 	public String showResults(@PathVariable("competitionId") Long competitionId, Model model) {
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userRepository.findByUsername(loggedInUser.getName());
+	    String name = user.getName();
+	    model.addAttribute("name", name);
+		
 		model.addAttribute("results", resultRepository.findByCompetitionIdOrderByWcPoint(competitionId));
 		model.addAttribute("competition", repository.findOne(competitionId));
 		return "results";

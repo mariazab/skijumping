@@ -5,54 +5,111 @@
 <head>
 	<title>Ski Jumping</title>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
 </head>
 <body>
-	<div class="container-fluid">
-		<h1 th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Log out" class="btn btn-outline-info"/>
-		</form>
-		<a class="btn btn-secondary" href="../athletes" th:href="@{../athletes}">Athletes</a>
-		<a class="btn btn-secondary" href="../hills" th:href="@{../hills}">Hills</a>
-		<a class="btn btn-secondary" href="../competitions" >Calendar</a>
-		<!--<a class="btn btn-secondary" href="#">Results</a> -->
-		<a class="btn btn-secondary" href="../standings" th:href="@{../standings}">World Cup Standings</a>
+		<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+		</div>
+		
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<!-- <h2 class="navbar-brand text-white" th:text="${'Welcome, ' + name + '!'}">Welcome</h2> -->
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+   				<ul class="navbar-nav mr-auto">
+      				<li class="nav-item active">
+        				<a class="nav-link" href="/dashboard" th:href="@{/dashboard}">Dashboard <span class="sr-only">(current)</span></a>
+      				</li>
+     				<li class="nav-item">
+        				<a class="nav-link" href="../athletes" th:href="@{../athletes}">Athletes</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="../competitions" th:href="@{../competitions}">Calendar</a>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link" href="../standings" th:href="@{../standings}">World Cup Standings</a>
+      				</li>
+    			</ul>
+    			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+      				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log out</button>
+    			</form>
+  			</div>
+		</nav>
+		<div class="container-fluid bg-dark">
 	
-		<div class="card-deck">
-			<div class="card" style="width: 18rem;">
+		<div class="row">
+		<div class="col">
+			<div class="card">
+				<div class="card-header"><h5>Latest Results</h5></div>
   				<div class="card-body">
-   					<h5 class="card-title">Latest Results</h5>
+   					<h5 class="card-title"></h5>
     				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
     				<p class="card-text">Here the latest results will appear with top 3 and user's fav jumpers. Link to full results, plus maybe an image?</p>
-    				<a href="#" class="card-link">Card link</a>
-    				<!-- <a href="#" class="card-link">Another link</a> -->
+    				<a href="#" class="btn btn-info">Card link</a>
   				</div>
 			</div>
-		
-			<div class="card text-white" style="width: 18rem;">
-				<div class="card-header" style="color:black"><h5>Next competition</h5></div>
-				<img class="card-img-bottom" src="/photos/planica.jpg" alt="Card image" />
+			</div>
+			<div class="col">
+			<div class="card">
+				<div class="card-header"><h5>Next competition</h5></div>
+				<img class="card-img" src="/photos/simon.jpg" alt="Card image" />
   				<div class="card-img-overlay">
    					<!-- <h5 class="card-title"></h5> -->
    					<br /><br />
-    				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-    				<p class="card-text">Here information about next competition will appear - hill, hs, k, time date (record)? image or image background!. Button to send email notification.</p>
-    				<a href="#" class="btn-sm btn-primary">Card link</a>
-    				<!-- <a href="#" class="card-link">Another link</a> -->
+    				<h6 class="card-subtitile mb-2" th:if="${competition.date != null}" th:text="${competition.date.getDate() + '.' + (competition.date.getMonth() + 1) + '.' + (competition.date.getYear() + 1900) + ', ' + competition.time.substring(0, 5) + ' CET'}"></h6>
+    				<h6 class="card-subtitle mb-2" th:if="${competition.hill != null}" th:text="${competition.hill.city + ', ' + competition.hill.name}"></h6>
+    				<!-- <h6 class="card-subtitle mb-2" th:if="${competition.hill != null}" th:text="${competition.hill.name}"></h6> -->
+    				<h6 class="card-subtitle mb-2"  th:if="${competition.type != null}" th:text="${competition.type}"></h6>
+    				<br />
+    				<p class="card-text" th:if="${competition.hill != null}" th:text="${'Hill Size: ' + competition.hill.hsPoint + 'm'}">Here information about next competition will appear.</p>
+    				<p class="card-text" th:if="${competition.hill != null}" th:text="${'K-Point: ' + competition.hill.kPoint + 'm'}"></p>
+    				<th:block th:if="${competition.hill !=null}">
+    				<p class="card-text" th:if="${competition.hill.hillRecord != null}" th:text="${'Hill Record: ' + competition.hill.hillRecord.length + 'm, ' + competition.hill.hillRecord.athlete.firstName + ' ' + competition.hill.hillRecord.athlete.lastName + ' in ' + competition.hill.hillRecord.year}"></p>
+    				<p class="card-text" th:unless="${competition.hill.hillRecord != null}"><br /></p>
+    				</th:block>
+    				<a th:if="${competition.date != null}" href="#" class="btn btn-info">Remind me with an email!</a>
   				</div>
 			</div>
-		
-			<div class="card" style="width: 18rem;">
+			</div>
+			<div class="col">
+			<div class="card">
+				<div class="card-header"><h5>FIS Facebook or Twitter Feed</h5></div>
   				<div class="card-body">
-   					<h5 class="card-title">FIS Facebook or Twitter Feed</h5>
+   					<h5 class="card-title"></h5>
     				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
     				<p class="card-text">Here facebook/twitter feed of FIS will be.</p>
-    				<a href="#" class="card-link">Card link</a>
-    				<!-- <a href="#" class="card-link">Another link</a> -->
+    				<a href="#" class="btn btn-info">Card link</a>
   				</div>
 			</div>
+			</div>
+			
+			<div class="w-100"></div>
+			<div class="col">
+			  <div class="card">
+			  	<div class="card-header"><h5>World Cup Standings</h5></div>
+  				<div class="card-body">
+   					<h5 class="card-title"></h5>
+    				<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    				<p class="card-text">Top 3 plus user's fav.</p>
+    				<a href="#" class="btn btn-info">Card link</a>
+  				</div>
+			</div>
+			</div>
+			<div class="col">
+			 
+			</div>
+			<div class="col">
+			  
+			</div>
+		
 		</div>
-	
+	<br /><br />
 	</div>
 
 </body>
