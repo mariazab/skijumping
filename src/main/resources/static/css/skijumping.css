@@ -67,3 +67,18 @@ html, body {
 .nav-link {
 	font-size: large;
 }
+#social-feed {
+	margin: 0;
+	padding: 0;
+}
+#add {
+	width:100%;
+	min-height:100%;
+	
+	padding:1%;
+}
+
+
+#save-btn {
+	margin: 1%;
+}

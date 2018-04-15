@@ -3,6 +3,8 @@ package fi.haagahelia.skijumping.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,8 @@ import fi.haagahelia.skijumping.domain.Hill;
 import fi.haagahelia.skijumping.domain.HillRecord;
 import fi.haagahelia.skijumping.domain.HillRecordRepository;
 import fi.haagahelia.skijumping.domain.HillRepository;
+import fi.haagahelia.skijumping.domain.User;
+import fi.haagahelia.skijumping.domain.UserRepository;
 
 @Controller
 public class HillController {
@@ -26,9 +30,17 @@ public class HillController {
 	
 	@Autowired AthleteRepository athleteRepository;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	// Showing all hills with records
 	@RequestMapping("/hills")
 	public String showHills(Model model) {
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userRepository.findByUsername(loggedInUser.getName());
+	    String name = user.getName();
+	    model.addAttribute("name", name);
+		
 		model.addAttribute("hills", repository.findAll());
 		/*model.addAttribute("records", recordRepository.findAll());*/
 		return "hills";

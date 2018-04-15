@@ -4,10 +4,16 @@
 <head>
 	<title>Add athlete</title>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" />
 </head>
-<body>
-	<h2>Add athlete</h2>
+<body class="bg-dark">
+	
 	<div class="container-fluid">
+	<div id="add" class="container">
+	<div class="card">
+	<div class="card-header">
+	<h2>Add athlete</h2></div>
+	<div class="card-body">
 	<div class="form-group">
 		<form th:object="${athlete}" th:action="@{saveAthlete}" action="#" method="post">
 			<label for="firstName">First name</label>
@@ -18,8 +24,12 @@
 			<input type="text" id="nationality" th:field="*{nationality}" class="form-control" />
 			<label for="birthYear">Birth year</label>
 			<input type="text" id="birthYear" th:field="*{birthYear}" class="form-control" />
-			<input type="submit" value="Save" class="btn btn-success"></input>
+			<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
 		</form>
+		</div>
+		</div>
+		</div>
+		
 	</div>
 	</div>
 

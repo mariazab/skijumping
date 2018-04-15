@@ -8,6 +8,11 @@
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
 </head>
 <body>
+
+<!-- Facebook feed of FIS JavaScript -->
+
+
+
 		<div class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
 		</div>
@@ -45,13 +50,19 @@
 	
 		<div class="row">
 		<div class="col">
-			<div class="card">
-				<div class="card-header"><h5>Latest Results</h5></div>
+			<div id="latest-result" class="card">
+				<div id="header-results" class="card-header" ><h5 th:text="${'Lastest Results - ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint}">Latest Results</h5></div>
   				<div class="card-body">
-   					<h5 class="card-title"></h5>
-    				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-    				<p class="card-text">Here the latest results will appear with top 3 and user's fav jumpers. Link to full results, plus maybe an image?</p>
-    				<a href="#" class="btn btn-info">Card link</a>
+  					<h6 class="card-subtitle mb-2 text-muted" th:text="${lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900) + ', ' + lastCompetition.type + ' competition'}">Card subtitle</h6>
+   					<table class="table">
+   							<tbody>
+   							<tr th:each="topThree: ${topThree}">
+   								<td th:if="${topThree.wcPoint != null}" th:text="${topThree.wcPoint.position}"></td>
+   								<th th:if="${topThree.athlete != null}" th:text="${topThree.athlete.firstName + ' ' + topThree.athlete.lastName}"></th>
+   								<th th:if="${topThree.points != null}" th:text="${topThree.points}"></th>
+   								</tr></tbody>
+   					</table>
+    				<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}" class="btn btn-info">See full results</a>
   				</div>
 			</div>
 			</div>
@@ -66,7 +77,7 @@
     				<h6 class="card-subtitle mb-2" th:if="${competition.hill != null}" th:text="${competition.hill.city + ', ' + competition.hill.name}"></h6>
     				<!-- <h6 class="card-subtitle mb-2" th:if="${competition.hill != null}" th:text="${competition.hill.name}"></h6> -->
     				<h6 class="card-subtitle mb-2"  th:if="${competition.type != null}" th:text="${competition.type}"></h6>
-    				<br />
+    				<!-- <br /> -->
     				<p class="card-text" th:if="${competition.hill != null}" th:text="${'Hill Size: ' + competition.hill.hsPoint + 'm'}">Here information about next competition will appear.</p>
     				<p class="card-text" th:if="${competition.hill != null}" th:text="${'K-Point: ' + competition.hill.kPoint + 'm'}"></p>
     				<th:block th:if="${competition.hill !=null}">
@@ -78,34 +89,67 @@
 			</div>
 			</div>
 			<div class="col">
-			<div class="card">
-				<div class="card-header"><h5>FIS Facebook or Twitter Feed</h5></div>
+			  <div class="card">
+			  	<div class="card-header"><h5>World Cup Standings</h5></div>
   				<div class="card-body">
-   					<h5 class="card-title"></h5>
-    				<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-    				<p class="card-text">Here facebook/twitter feed of FIS will be.</p>
-    				<a href="#" class="btn btn-info">Card link</a>
+  				<h6 class="card-subtitle mb-2 text-muted" th:text="${'Top 3 after ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint + ', ' + lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900)}">Top 3</h6>
+  					<table class="table">
+   							<tbody th:with="i=0">
+   							<tr th:each="standing, iterator: ${wcTopThree}">
+   								<td th:if="${standing.athlete.firstName != null}" th:text="${iterator.index + 1}"></td>
+   								<th th:if="${standing.athlete.firstName != null}" th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
+   								<th th:if="${standing.points != null}" th:text="${standing.points}"></th>
+   								</tr></tbody>
+   					</table>
+   					
+    				<!-- <p class="card-text">Top 3 plus user's fav.</p> -->
+    				<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a>
   				</div>
 			</div>
 			</div>
 			
 			<div class="w-100"></div>
-			<div class="col">
-			  <div class="card">
-			  	<div class="card-header"><h5>World Cup Standings</h5></div>
+				<div class="col">
+			<div id="latest-result" class="card">
+				<div class="card-header"><h5>Latest Results - Your Favourites</h5></div>
   				<div class="card-body">
-   					<h5 class="card-title"></h5>
-    				<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    				<p class="card-text">Top 3 plus user's fav.</p>
-    				<a href="#" class="btn btn-info">Card link</a>
+   						<table class="table">
+   							<tbody>
+   							<tr th:each="topThree: ${topThree}">
+   								<td th:if="${topThree.wcPoint != null}" th:text="${topThree.wcPoint.position}"></td>
+   								<th th:if="${topThree.athlete != null}" th:text="${topThree.athlete.firstName + ' ' + topThree.athlete.lastName}"></th>
+   								<th th:if="${topThree.points != null}" th:text="${topThree.points}"></th>
+   								</tr></tbody>
+   					</table>
+    				<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}" class="btn btn-info">See full results</a>
+  				</div>
+			</div>
+			</div>
+				<div class="col">
+			<div class="card">
+				<div class="card-header"><h5>FIS Ski Jumping on Twitter</h5></div>
+  				<div id="social-feed" class="card-body">
+    				<a class="twitter-timeline" data-height="350" data-theme="light" href="https://twitter.com/FISskijumping?ref_src=twsrc%5Etfw">Tweets by FISskijumping</a> <script th:inline="javascript" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   				</div>
 			</div>
 			</div>
 			<div class="col">
-			 
+			  <div class="card">
+			  	<div class="card-header"><h5>World Cup Standings - Your Favourites</h5></div>
+  				<div class="card-body">
+   					<table class="table">
+   							<tbody th:with="i=0">
+   							<tr th:each="standing, iterator: ${wcTopThree}">
+   								<td th:if="${standing.athlete.firstName != null}" th:text="${iterator.index + 1}"></td>
+   								<th th:if="${standing.athlete.firstName != null}" th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
+   								<th th:if="${standing.points != null}" th:text="${standing.points}"></th>
+   								</tr></tbody>
+   					</table>
+   					
+    				<!-- <p class="card-text">Top 3 plus user's fav.</p> -->
+    				<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a>
+  				</div>
 			</div>
-			<div class="col">
-			  
 			</div>
 		
 		</div>

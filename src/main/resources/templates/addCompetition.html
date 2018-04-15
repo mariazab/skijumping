@@ -3,11 +3,17 @@
 		xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Add competition</title>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" /> 
 </head>
-<body>
-	<h2>Add competition</h2>
+<body class="bg-dark">
+
 	<div class="container-fluid">
+	<div id="add" class="container">
+	<div class="card">
+	<div class="card-header">
+	<h2>Add competition</h2></div>
+	<div class="card-body">
 	<div class="form-group">
 		<form th:object="${competition}" th:action="@{saveCompetition}" action="#" method="post">
 			<label for="id">ID</label>
@@ -24,8 +30,11 @@
 			<input type="time" id="time" th:field="*{time}" class="form-control" />
 			<label for="type">Type</label>
 			<input type="text" id="type" th:field="*{type}" class="form-control" />	
-			<input type="submit" value="Save" class="btn btn-success" />	
+			<input type="submit" value="Save" id="save-btn" class="btn btn-success" />	
 		</form>
+	</div>
+	</div>
+	</div>
 	</div>
 	</div>
 

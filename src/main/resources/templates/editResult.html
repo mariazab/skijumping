@@ -4,10 +4,17 @@
 <head>
 	<title>Edit result</title>
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" />
 </head>
-<body>
-	<h2 th:text="${'Edit result for ' + result.competition.hill.city + ' HS' + result.competition.hill.hsPoint + ' ' + result.competition.type}">Edit result</h2>
+<body class="bg-dark">
+	
 	<div class="container-fluid">
+	<div id="add" class="container">
+	<div class="card">
+	<div class="card-header">
+	<h2 th:text="${'Edit result for ' + result.competition.hill.city + ' HS' + result.competition.hill.hsPoint + ' ' + result.competition.type}">Edit result</h2>
+	</div>
+	<div class="card-body">
 	<div class="form-group">
 		<form th:object="${result}" th:action="@{../saveEditResult}" action="#" method="post">
 			<input type="hidden" th:field="*{id}" />
@@ -26,8 +33,11 @@
 			<input type="text" id="jump2" th:field="*{jump2}" class="form-control" />
 			<label for="points">Points</label>
 			<input type="text" id="points" th:field="*{points}" class="form-control" />
-			<input type="submit" value="Save" class="btn btn-success"></input>
+			<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
 		</form>
+		</div>
+		</div>
+		</div>
 	</div>
 	</div>
 
