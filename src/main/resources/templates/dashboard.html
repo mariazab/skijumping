@@ -6,19 +6,16 @@
 	<title>Ski Jumping</title>
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
+	
 </head>
 <body>
-
-<!-- Facebook feed of FIS JavaScript -->
-
-
 
 		<div class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
 		</div>
 		
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<!-- <h2 class="navbar-brand text-white" th:text="${'Welcome, ' + name + '!'}">Welcome</h2> -->
+			
   			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     			<span class="navbar-toggler-icon"></span>
   			</button>
@@ -84,7 +81,7 @@
     				<p class="card-text" th:if="${competition.hill.hillRecord != null}" th:text="${'Hill Record: ' + competition.hill.hillRecord.length + 'm, ' + competition.hill.hillRecord.athlete.firstName + ' ' + competition.hill.hillRecord.athlete.lastName + ' in ' + competition.hill.hillRecord.year}"></p>
     				<p class="card-text" th:unless="${competition.hill.hillRecord != null}"><br /></p>
     				</th:block>
-    				<a th:if="${competition.date != null}" href="#" class="btn btn-info">Remind me with an email!</a>
+    				<a th:if="${competition.date != null}" id="sendBtn" href="/sendEmail" th:href="@{/sendEmail}" class="btn btn-info">Send me the information!</a>
   				</div>
 			</div>
 			</div>
@@ -115,10 +112,10 @@
   				<div class="card-body">
    						<table class="table">
    							<tbody>
-   							<tr th:each="topThree: ${topThree}">
-   								<td th:if="${topThree.wcPoint != null}" th:text="${topThree.wcPoint.position}"></td>
-   								<th th:if="${topThree.athlete != null}" th:text="${topThree.athlete.firstName + ' ' + topThree.athlete.lastName}"></th>
-   								<th th:if="${topThree.points != null}" th:text="${topThree.points}"></th>
+   							<tr th:each="favResult: ${favResults}">
+   								<td th:if="${favResult.wcPoint != null}" th:text="${favResult.wcPoint.position}"></td>
+   								<th th:if="${favResult.athlete != null}" th:text="${favResult.athlete.firstName + ' ' + favResult.athlete.lastName}"></th>
+   								<th th:if="${favResult.points != null}" th:text="${favResult.points}"></th>
    								</tr></tbody>
    					</table>
     				<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}" class="btn btn-info">See full results</a>
@@ -139,10 +136,10 @@
   				<div class="card-body">
    					<table class="table">
    							<tbody th:with="i=0">
-   							<tr th:each="standing, iterator: ${wcTopThree}">
-   								<td th:if="${standing.athlete.firstName != null}" th:text="${iterator.index + 1}"></td>
-   								<th th:if="${standing.athlete.firstName != null}" th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
-   								<th th:if="${standing.points != null}" th:text="${standing.points}"></th>
+   							<tr th:each="favStanding, iterator: ${favStandings}">
+   								<td th:if="${favStanding.athlete.firstName != null}" th:text="${favWcPosition[iterator.index] + 1}"></td>
+   								<th th:if="${favStanding.athlete.firstName != null}" th:text="${favStanding.athlete.firstName + ' ' + favStanding.athlete.lastName}"></th>
+   								<th th:if="${favStanding.points != null}" th:text="${favStanding.points}"></th>
    								</tr></tbody>
    					</table>
    					
@@ -153,8 +150,12 @@
 			</div>
 		
 		</div>
-	<br /><br />
+		<br />
+		<div class="navbar">
+			<p class="text-secondary">2018 &copy; Maria Żabińska</p>
+			<p class="text-secondary">Need help? <a class="text-secondary" href="mailto:worldofskijumping@gmail.com">Send an email</a></p>
+		</div>
 	</div>
-
+	
 </body>
 </html>

@@ -28,10 +28,10 @@ nav {
 }
 
 #login {
-	background-image: url('planica.jpg');
+	background-image: url('oslo.jpg');
 	background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center bottom;
+    background-position: center top;
 	width:100%;
 	min-height:100%;
 	text-align: center;
@@ -39,10 +39,10 @@ nav {
 }
 
 #register {
-	background-image: url('planica.jpg');
+	background-image: url('oslo.jpg');
 	background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center bottom;
+    background-position: center top;
 	width:100%;
 	min-height:100%;
 	text-align: center;
@@ -54,7 +54,9 @@ nav {
 	padding-bottom: 2%;
 	margin: 0 auto;
 	opacity: 0.9;
+	text-align: center;
 }
+
 
 #welcome-login {
 	padding: 1%;
@@ -63,6 +65,7 @@ nav {
 
 html, body {
 	height:100%;
+	min-height:100%;
 }
 .nav-link {
 	font-size: large;
@@ -82,3 +85,4 @@ html, body {
 #save-btn {
 	margin: 1%;
 }
+

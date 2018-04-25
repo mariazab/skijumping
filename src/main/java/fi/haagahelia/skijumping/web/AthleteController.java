@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.haagahelia.skijumping.domain.Athlete;
 import fi.haagahelia.skijumping.domain.AthleteRepository;
+import fi.haagahelia.skijumping.domain.FavAthlete;
+import fi.haagahelia.skijumping.domain.FavAthleteRepository;
 import fi.haagahelia.skijumping.domain.User;
 import fi.haagahelia.skijumping.domain.UserRepository;
 import fi.haagahelia.skijumping.domain.WcStanding2018Repository;
@@ -28,6 +30,9 @@ public class AthleteController {
 	WcStanding2018Repository wcStandingRepository;
 	
 	@Autowired
+	FavAthleteRepository favAthleteRepository;
+	
+	@Autowired
 	private UserRepository userRepository;
 	
 	// Showing all athletes
@@ -38,6 +43,7 @@ public class AthleteController {
 	    String name = user.getName();
 	    model.addAttribute("name", name);
 		
+	    model.addAttribute("favAthletes", favAthleteRepository.findByUserId(user.getId()));
 		model.addAttribute("athletes", repository.findAll());
 		return "athletes";
 	}
@@ -71,6 +77,45 @@ public class AthleteController {
 		return "editAthlete";
 	}
 	
+	//Adding athlete to user's favorites
+	@RequestMapping("/addToFav/{id}")
+	public String addToFav(@PathVariable("id") Long athleteId, Model model) {
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userRepository.findByUsername(loggedInUser.getName());
+	    Athlete athlete = repository.findOne(athleteId);
+	    FavAthlete favAthlete = new FavAthlete(user, athlete);
+	    favAthleteRepository.save(favAthlete);
+	    return "redirect:../athletes";
+	    
+	}
+	
+	//Listing all favorite athletes
+	@RequestMapping("/favorites")
+	public String showFav(Model model) {
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+	    User user = userRepository.findByUsername(loggedInUser.getName());
+	    List<FavAthlete> favAthletes = favAthleteRepository.findByUserId(user.getId());
+	    model.addAttribute("name", user.getName());
+	    model.addAttribute("favAthletes", favAthletes);
+	    return "favorites";
+	}
+	
+	//Deleting athlete from favorites
+	@RequestMapping("/deleteFromFav/{id}")
+	public String deleteFromFav(@PathVariable("id") Long athleteId, Model model) {
+			Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+		    User user = userRepository.findByUsername(loggedInUser.getName());
+		    Long userId = user.getId();
+		    List<FavAthlete> favAthletes = favAthleteRepository.findByUserId(userId);
+		    for(int i = 0; i < favAthletes.size(); i++) {
+		    	if(favAthletes.get(i).getAthlete().getId() == athleteId) {
+		    		favAthleteRepository.delete(favAthletes.get(i));
+		    	}
+		    }
+		    return "redirect:../athletes";
+		    
+		}
+	
 	// RESTful service to get all athletes
 	@RequestMapping(value="/athletesApi", method=RequestMethod.GET)
 	public @ResponseBody List<Athlete> athleteListRest() {
@@ -82,5 +127,6 @@ public class AthleteController {
 	public @ResponseBody Athlete findAthleteRest(@PathVariable("id") Long athleteId) {
 		return repository.findOne(athleteId);
 	}
+	
 	
 }

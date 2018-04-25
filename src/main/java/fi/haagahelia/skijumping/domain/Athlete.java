@@ -41,6 +41,9 @@ public class Athlete {
 	
 	@OneToOne (cascade = CascadeType.DETACH,mappedBy = "athlete")
 	private WcStanding2018 wcStanding2018;
+	
+	@OneToMany (cascade = CascadeType.ALL,mappedBy = "athlete")
+	private List<FavAthlete> favAthlete;
 		
 	public Athlete() {
 	}

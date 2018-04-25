@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>Results</title>
-	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
-	<link type="text/css" rel="stylesheet" href="../css/skijumping.css" th:href="@{../css/skijumping.css}" />
+	<title>Athletes</title>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
 </head>
 <body>
-
+	
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
 	</div>
 		
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			
   			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     			<span class="navbar-toggler-icon"></span>
   			</button>
@@ -28,7 +27,7 @@
         				<a class="nav-link" href="../athletes" th:href="@{../athletes}">Athletes</a>
       				</li>
       				<li class="nav-item">
-        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills <span class="sr-only">(current)</span></a>
+        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills</a>
       				</li>
       				<li class="nav-item">
         				<a class="nav-link" href="../competitions" th:href="@{../competitions}">Calendar</a>
@@ -42,50 +41,44 @@
     			</form>
   			</div>
 		</nav>
-
+	
 	<div class="container-fluid bg-dark">
-		<br />
+	<br />
 	<div class="card">
-				<div class="card-header">	
-	<h2 th:text="${'Results ' + competition.hill.city + ' HS' + competition.hill.hsPoint + ' ' + competition.type}">Results</h2>
-	<a class="btn btn-outline-info my-2 my-sm-0" th:href="@{../competitions}">Back to Calendar</a>
-	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-info" th:href="@{/addResult/{id}(id=${competition.id})}">Add results</a></div>
+				<div class="card-header">
+	<h2>Athletes</h2>
+	<a class="btn btn-outline-info my-2 my-sm-0" th:href="@{../athletes}">Back to Athletes</a></div>
 	<div class="card-body">
 	<table class="table table-hover">
 		<thead class="thead-dark">
 			<tr>
-				<th>Place</th>
-				<th>Athlete</th>
-				<th>Nation</th>
-				<th>Jump 1</th>
-				<th>Jump 2</th>
-				<th>Points</th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
+				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
+				<th>Name</th>
+				<th>Nationality</th>
+				<th>Birth year</th>
+				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="result: ${results}">
-				<td th:text="${result.wcPoint.position}"></td>
-				<td th:text="${result.athlete.firstName + ' ' + result.athlete.lastName.toUpperCase()}"></td>
-				<td th:text="${result.athlete.nationality}"></td>
-				<td th:text="${result.jump1 + 'm'}"></td>
-				<td th:if="${result.jump2 != null}" th:text="${result.jump2 + 'm'}"></td>
-				<td th:unless="${result.jump2 != null}"></td>
-				<td th:text="${result.points}"></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-info" th:href="@{/editResult/{id}(id=${result.id})}">Edit</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/deleteResult/{id}(id=${result.id})}">Delete</a></td>
+			<tr th:each="favAthlete: ${favAthletes}">
+				<td sec:authorize="hasAuthority('ADMIN')" th:text="${favAthlete.athlete.id}"></td>
+				<td th:text="${favAthlete.athlete.firstName + ' ' + favAthlete.athlete.lastName.toUpperCase()}"></td>
+				<td th:text="${favAthlete.athlete.nationality}"></td>
+				<td th:text="${favAthlete.athlete.birthYear}"></td>			
+				<td><a class="btn btn-outline-danger" th:href="@{/deleteFromFav/{id}(id=${favAthlete.athlete.id})}">Delete from Favorites</a></td>
 			</tr>
 		</tbody>
 	</table>
 	</div>
 	</div>
+	
 	<br />
 		<div class="navbar">
 			<p class="text-secondary">2018 &copy; Maria Żabińska</p>
 			<p class="text-secondary">Need help? <a class="text-secondary" href="mailto:worldofskijumping@gmail.com">Send an email</a></p>
 		</div>
 	</div>
-
+	
 </body>
 </html>

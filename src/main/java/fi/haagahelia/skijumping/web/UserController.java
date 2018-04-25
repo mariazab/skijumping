@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import fi.haagahelia.skijumping.domain.SignupForm;
 import fi.haagahelia.skijumping.domain.User;
 import fi.haagahelia.skijumping.domain.UserRepository;
+import fi.haagahelia.skijumping.mail.EmailService;
+import fi.haagahelia.skijumping.mail.Mail;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+    private EmailService emailService;
 	
 	// Login 
 	@RequestMapping("/login")
@@ -54,6 +59,7 @@ public class UserController {
 		    	// Checking if user exists
 		    	if (repository.findByUsername(signupForm.getUsername()) == null) { 
 		    		repository.save(newUser);
+		    		sendWelcomeMail(newUser);
 		    	}
 		    	else {
 	    			bindingResult.rejectValue("username", "err.username", "Username already exists");    	
@@ -69,6 +75,23 @@ public class UserController {
     		return "signup";
     	}
     	return "redirect:/login"; 
+	}
+	
+	public void sendWelcomeMail(User user) {
+		
+		String name = user.getName();
+		String email = user.getEmail();  
+					    
+		//Set the content of the email
+	    String content = "Hi " + name + "!\n\nWelcome to the World of Ski Jumping!\n\nWe are very excited to have you on board! Or should we say hill? :) \nOn this website you can check out the latest results and world cup standings, information about the next competition and the Twitter Feed of FIS Ski Jumping.\nYou can also add ski jumpers to your favorites and see their results on your dashboard!\n\nIf you have any questions or feedback, please don't hesitate to send an email!\n\n\nHappy cheering!\n\nMay the wind be in your favour! :)\n\n\n\nThis email has been sent automatically by worldofskijumping@gmail.com";
+						
+	    Mail mail = new Mail();
+	    mail.setFrom("worldofskijumping@gmail.com");
+	    mail.setTo(email);
+	    mail.setSubject(name + ", welcome to the World of Ski Jumping!");
+	    mail.setContent(content);
+		        
+	    emailService.sendSimpleMessage(mail);
 	}
 
 }
