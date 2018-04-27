@@ -13,13 +13,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 public class SkijumpingApplication {
 
 	public static void main(String[] args) {
-		 Tunnel t=new Tunnel();
-	        try  {
-	            t.go();
-	        } catch(Exception ex){
-	            ex.printStackTrace();
-	        }
-		
 		SpringApplication.run(SkijumpingApplication.class, args);
 		
 	}
@@ -43,8 +36,8 @@ public class SkijumpingApplication {
 	    mailSender.setHost("smtp.gmail.com");
 	    mailSender.setPort(587);
 	     
-	    mailSender.setUsername("user@gmail.com");
-	    mailSender.setPassword("password");
+	    mailSender.setUsername("worldofskijumping@gmail.com");
+	    mailSender.setPassword("jsifristmopfbvdp");
 	     
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");

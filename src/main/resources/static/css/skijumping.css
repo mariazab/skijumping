@@ -67,6 +67,10 @@ html, body {
 	height:100%;
 	min-height:100%;
 }
+
+#fav {
+	min-height: 100%;
+}
 .nav-link {
 	font-size: large;
 }
