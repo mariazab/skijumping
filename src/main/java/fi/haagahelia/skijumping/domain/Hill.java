@@ -23,13 +23,13 @@ public class Hill {
 	@Column(name = "id")
 	private long id;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@Column(name = "country")
+	@Column(name = "country", nullable = false)
 	private String country;
 	
-	@Column(name = "city")
+	@Column(name = "city", nullable = false)
 	private String city;
 	
 	@Column(name = "hspoint")

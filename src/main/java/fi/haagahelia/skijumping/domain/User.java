@@ -20,19 +20,19 @@ public class User {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "username")
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 	
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String passwordHash;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
 	
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	private String email;
 	
-	@Column(name = "role")
+	@Column(name = "role", nullable = false, unique = true)
 	private String role;
 	
 	@OneToMany (cascade = CascadeType.ALL,mappedBy = "athlete")

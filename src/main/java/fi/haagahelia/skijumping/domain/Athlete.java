@@ -21,10 +21,10 @@ public class Athlete {
 	@Column(name = "id")
 	private long id;
 	
-	@Column(name = "firstname")
+	@Column(name = "firstname", nullable = false)
 	private String firstName;
 	
-	@Column(name = "lastname")
+	@Column(name = "lastname", nullable = false)
 	private String lastName;
 	
 	@Column(name = "nationality")
