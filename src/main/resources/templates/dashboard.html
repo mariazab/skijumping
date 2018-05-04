@@ -53,7 +53,7 @@
   					<h6 class="card-subtitle mb-2 text-muted" th:if="${lastCompetition.date != null}" th:text="${lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900) + ', ' + lastCompetition.type + ' competition'}">Card subtitle</h6>
    					<table class="table">
    							<tbody>
-   							<tr th:each="topThree: ${topThree}">
+   							<tr th:if="${topThree.athlete != null}" th:each="topThree: ${topThree}">
    								<td th:if="${topThree.wcPoint != null}" th:text="${topThree.wcPoint.position}"></td>
    								<th th:if="${topThree.athlete != null}" th:text="${topThree.athlete.firstName + ' ' + topThree.athlete.lastName}"></th>
    								<th th:if="${topThree.points != null}" th:text="${topThree.points}"></th>
@@ -92,7 +92,7 @@
   				<h6 class="card-subtitle mb-2 text-muted" th:if="${lastCompetition.date != null}" th:text="${'Top 3 after ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint + ', ' + lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900)}">Top 3</h6>
   					<table class="table">
    							<tbody th:with="i=0">
-   							<tr th:each="standing, iterator: ${wcTopThree}">
+   							<tr th:if="${standing.athlete != null}" th:each="standing, iterator: ${wcTopThree}">
    								<td th:if="${standing.athlete.firstName != null}" th:text="${iterator.index + 1}"></td>
    								<th th:if="${standing.athlete.firstName != null}" th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
    								<th th:if="${standing.points != null}" th:text="${standing.points}"></th>
@@ -110,7 +110,7 @@
   				<div class="card-body">
    						<table class="table">
    							<tbody>
-   							<tr th:each="favResult: ${favResults}">
+   							<tr th:if="${favResult.athlete != null}" th:each="favResult: ${favResults}">
    								<td th:if="${favResult.wcPoint != null}" th:text="${favResult.wcPoint.position}"></td>
    								<th th:if="${favResult.athlete != null}" th:text="${favResult.athlete.firstName + ' ' + favResult.athlete.lastName}"></th>
    								<th th:if="${favResult.points != null}" th:text="${favResult.points}"></th>
@@ -134,14 +134,13 @@
   				<div class="card-body">
    					<table class="table">
    							<tbody th:with="i=0">
-   							<tr th:each="favStanding, iterator: ${favStandings}">
+   							<tr th:if="${fasStanding.athlete.firstName != null}" th:each="favStanding, iterator: ${favStandings}">
    								<td th:if="${favStanding.athlete.firstName != null}" th:text="${favWcPosition[iterator.index] + 1}"></td>
    								<th th:if="${favStanding.athlete.firstName != null}" th:text="${favStanding.athlete.firstName + ' ' + favStanding.athlete.lastName}"></th>
    								<th th:if="${favStanding.points != null}" th:text="${favStanding.points}"></th>
    								</tr></tbody>
    					</table>
    					
-    				<!-- <p class="card-text">Top 3 plus user's fav.</p> -->
     				<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a>
   				</div>
 			</div>
