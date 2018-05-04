@@ -26,8 +26,8 @@ public class SkijumpingApplication {
 		return (args) -> {
 			
 			//Create users
-			User admin = new User("admin", $2a$04$dVznRPsrSwAFoca/4GyfleU4dhcxBL3gkBOoHE2TFwZ.uO6m0PrW."", "admin", "worldofskijumping@gmail.com", "ADMIN");
-			User user = new User("user", "$2a$04$hwF8yFumVEqAF4nWVfY1uucDSQN8hLskT673L7grSK81gFa7mh7Wq", "test user", "worldofskijumping@gmail.com", "USER");
+			User admin = new User("admin", "", "admin", "worldofskijumping@gmail.com", "ADMIN");
+			User user = new User("user", "", "test user", "worldofskijumping@gmail.com", "USER");
 			userRepository.save(admin);
 			userRepository.save(user);
 			
@@ -41,7 +41,7 @@ public class SkijumpingApplication {
 	    mailSender.setPort(587);
 	     
 	    mailSender.setUsername("worldofskijumping@gmail.com");
-	    mailSender.setPassword("jsifristmopfbvdp");
+	    mailSender.setPassword("");
 	     
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");
