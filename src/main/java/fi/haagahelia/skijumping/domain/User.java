@@ -32,7 +32,7 @@ public class User {
 	@Column(name = "email", nullable = false)
 	private String email;
 	
-	@Column(name = "role", nullable = false, unique = true)
+	@Column(name = "role", nullable = false)
 	private String role;
 	
 	@OneToMany (cascade = CascadeType.ALL,mappedBy = "athlete")
