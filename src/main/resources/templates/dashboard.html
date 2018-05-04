@@ -134,7 +134,7 @@
   				<div class="card-body">
    					<table class="table">
    							<tbody th:with="i=0">
-   							<tr th:if="${fasStanding.athlete.firstName != null}" th:each="favStanding, iterator: ${favStandings}">
+   							<tr th:if="${favStanding.athlete.firstName != null}" th:each="favStanding, iterator: ${favStandings}">
    								<td th:if="${favStanding.athlete.firstName != null}" th:text="${favWcPosition[iterator.index] + 1}"></td>
    								<th th:if="${favStanding.athlete.firstName != null}" th:text="${favStanding.athlete.firstName + ' ' + favStanding.athlete.lastName}"></th>
    								<th th:if="${favStanding.points != null}" th:text="${favStanding.points}"></th>
