@@ -21,7 +21,7 @@ public class SkijumpingApplication {
 		
 	}
 	
-	@Bean
+/*	@Bean
 	public CommandLineRunner clr(UserRepository userRepository) {
 		return (args) -> {
 			
@@ -32,7 +32,7 @@ public class SkijumpingApplication {
 			userRepository.save(user);
 			
 		};
-	}
+	}*/
 	
 	@Bean
 	public JavaMailSender getJavaMailSender() {
