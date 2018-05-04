@@ -53,6 +53,11 @@ public class SkiJumpingController  {
 	@Autowired
     private EmailService emailService;
 	
+	@RequestMapping("/")
+	public String redirect(Model model) {
+		return "redirect:dashboard";
+	}
+	
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public String skijumping(Model model) {
 		//Get the name of the current user and pass it as a model
