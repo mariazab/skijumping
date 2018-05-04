@@ -41,7 +41,7 @@ public class SkijumpingApplication {
 	    mailSender.setPort(587);
 	     
 	    mailSender.setUsername("worldofskijumping@gmail.com");
-	    mailSender.setPassword("");
+	    mailSender.setPassword("jsifristmopfbvdp");
 	     
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");

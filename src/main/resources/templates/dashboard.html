@@ -92,7 +92,7 @@
   				<h6 class="card-subtitle mb-2 text-muted" th:if="${lastCompetition.date != null}" th:text="${'Top 3 after ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint + ', ' + lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900)}">Top 3</h6>
   					<table class="table">
    							<tbody th:with="i=0">
-   							<tr th:if="${standing.athlete != null}" th:each="standing, iterator: ${wcTopThree}">
+   							<tr th:if="${standing.athlete.firstName != null}" th:each="standing, iterator: ${wcTopThree}">
    								<td th:if="${standing.athlete.firstName != null}" th:text="${iterator.index + 1}"></td>
    								<th th:if="${standing.athlete.firstName != null}" th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
    								<th th:if="${standing.points != null}" th:text="${standing.points}"></th>
