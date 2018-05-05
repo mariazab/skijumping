@@ -69,8 +69,11 @@ public class SkiJumpingController  {
 	    Competition competition = getNextCompetition();
 	    
 	    //Get the top 3 from last competition
+	    System.out.println("trying to get last comp");
+	    System.out.println(getLastCompetition());
 	    Competition lastCompetition = getLastCompetition();
 	    long competitionId = lastCompetition.getId();
+	    System.out.println("last competition: " + lastCompetition.getType());
 	    List<Result2018> results = resultRepository.findByCompetitionIdOrderByWcPoint(competitionId);
 	    List<Result2018> topThree = new ArrayList<Result2018>();
 		for(int i = 0; i < results.size(); i++) {
@@ -94,9 +97,17 @@ public class SkiJumpingController  {
 		//Get top 3 from standings
 		List<WcStanding2018> standings = standingsRepository.findAllByOrderByPointsDesc();
 		List<WcStanding2018> wcTopThree = new ArrayList<WcStanding2018>();
-		for(int i = 0; i < 3; i++) {
-			wcTopThree.add(standings.get(i));
+		if(standings.size() > 3) {
+			for(int i = 0; i < 3; i++) {
+				wcTopThree.add(standings.get(i));
+			}
 		}
+		else {
+			for(int i = 0; i < standings.size(); i++) {
+				wcTopThree.add(standings.get(i));
+			}
+		}
+		
 		
 		//Standings of user's favorite athletes
 		List<WcStanding2018> favStandings = new ArrayList<WcStanding2018>();

@@ -20,7 +20,7 @@ import fi.haagahelia.skijumping.domain.WcPointRepository;
 public class WcPointRepositoryTest {
 
 	@Autowired
-	WcPointRepository repository;
+	private WcPointRepository repository;
 	
 	//Test creating new World Cup Points
 	@Test
@@ -47,6 +47,6 @@ public class WcPointRepositoryTest {
 		WcPoint wcPoint = repository.findOne(35);
 		repository.delete(wcPoint);
 		List<WcPoint> points = (List<WcPoint>) repository.findAll();
-		assertThat(points.get(0).getPosition()).isNotEqualTo(35);
+		assertThat(points.get(points.size() - 1).getPosition()).isNotEqualTo(35);
 	}
 }

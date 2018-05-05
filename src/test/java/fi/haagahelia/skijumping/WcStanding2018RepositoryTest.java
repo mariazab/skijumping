@@ -22,10 +22,10 @@ import fi.haagahelia.skijumping.domain.WcStanding2018Repository;
 public class WcStanding2018RepositoryTest {
 
 	@Autowired
-	WcStanding2018Repository repository;
+	private WcStanding2018Repository repository;
 	
 	@Autowired
-	AthleteRepository athleteRepository;
+	private AthleteRepository athleteRepository;
 	
 	//Testing creating new world cup standing
 	@Test
@@ -67,6 +67,6 @@ public class WcStanding2018RepositoryTest {
 		repository.delete(standing);
 		
 		List<WcStanding2018> standings = (List<WcStanding2018>) repository.findAll();
-		assertThat(standings.get(0).getPoints()).isNotEqualTo(100);
+		assertThat(standings.get(standings.size() - 1).getPoints()).isNotEqualTo(100);
 	}
 }

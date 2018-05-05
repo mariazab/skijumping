@@ -23,10 +23,10 @@ import fi.haagahelia.skijumping.domain.HillRepository;
 public class CompetitionRepositoryTest {
 
 	@Autowired
-	CompetitionRepository repository;
+	private CompetitionRepository repository;
 	
 	@Autowired
-	HillRepository hillRepository;
+	private HillRepository hillRepository;
 	
 	//Test creating new competition
 	@Test
@@ -80,6 +80,6 @@ public class CompetitionRepositoryTest {
 		repository.delete(competition);
 		
 		List<Competition> competitions = (List<Competition>) repository.findAll();
-		assertThat(competitions.get(0).getType()).isNotEqualTo("test");
+		assertThat(competitions.get(competitions.size() - 1).getType()).isNotEqualTo("test");
 	}
 }

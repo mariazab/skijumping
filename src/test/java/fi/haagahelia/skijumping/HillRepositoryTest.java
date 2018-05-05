@@ -23,13 +23,13 @@ import fi.haagahelia.skijumping.domain.HillRepository;
 public class HillRepositoryTest {
 
 	@Autowired
-	HillRepository repository;
+	private HillRepository repository;
 	
 	@Autowired
-	HillRecordRepository recordRepository;
+	private HillRecordRepository recordRepository;
 	
 	@Autowired
-	AthleteRepository athleteRepository;
+	private AthleteRepository athleteRepository;
 	
 	//Test creating new hill
 	@Test
@@ -93,7 +93,7 @@ public class HillRepositoryTest {
 		repository.delete(hill);
 		
 		List<Hill> hills = (List<Hill>) repository.findAll();
-		assertThat(hills.get(0).getName()).isNotEqualTo("Skocznia");
+		assertThat(hills.get(hills.size() - 1).getName()).isNotEqualTo("Skocznia");
 	}
 	
 	//Test deleting hill record

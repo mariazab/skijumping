@@ -29,19 +29,19 @@ import fi.haagahelia.skijumping.domain.WcPointRepository;
 public class Result2018RepositoryTest {
 
 	@Autowired
-	Result2018Repository repository;
+	private Result2018Repository repository;
 	
 	@Autowired
-	AthleteRepository athleteRepository;
+	private AthleteRepository athleteRepository;
 	
 	@Autowired
-	HillRepository hillRepository;
+	private HillRepository hillRepository;
 	
 	@Autowired
-	CompetitionRepository competitionRepository;
+	private CompetitionRepository competitionRepository;
 	
 	@Autowired
-	WcPointRepository wcPointRepository;
+	private WcPointRepository wcPointRepository;
 	
 	//Test creating new Result2018
 	@Test
@@ -128,6 +128,6 @@ public class Result2018RepositoryTest {
 		repository.delete(result);
 		
 		List<Result2018> results = (List<Result2018>) repository.findAll();
-		assertThat(results.get(0).getJump1()).isNotEqualTo(123.5);
+		assertThat(results.get(results.size() - 1).getJump1()).isNotEqualTo(123.5);
 	}
 }

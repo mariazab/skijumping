@@ -26,7 +26,7 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
 	
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", nullable = false)
 	private String name;
 	
 	@Column(name = "email", nullable = false)
@@ -43,7 +43,6 @@ public class User {
 	}
 
 	public User(String username, String passwordHash, String name, String email, String role) {
-		super();
 		this.username = username;
 		this.passwordHash = passwordHash;
 		this.name = name;
