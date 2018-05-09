@@ -1,43 +1,56 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Register</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
 </head>
 <body>
 	<div id="register" class="container-fluid">
-    	<h1 id="welcome-login">Welcome to the World of Ski Jumping!</h1>
-    	<div id="login-card" class="card">
-				<div class="card-header"><h5>Register</h5></div>
-			<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
-				<div>
-					<label>Username: <input type="text" th:field="*{username}" class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
-				</div>
-				<div>
-					<label>Password: <input type="password" th:field="*{password}" class="form-control"/></label>
-					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
-				</div>
-				<div>
-					<label>Retype password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
-					<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
-				</div>
-				<div>
-					<label>Name: <input type="text" th:field="*{name}" class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
-				</div>
-				<div>
-					<label>E-mail:<input type="email" th:field="*{email}" class="form-control" /></label>
-					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>	
-				</div>
-			
-				<input type="submit" class="btn btn-success" value="Register"></input>
-		
-			</form>
+		<h1 id="welcome-login">Welcome to the World of Ski Jumping!</h1>
+		<div id="login-card" class="card">
+			<div class="card-header">
+				<h5>Register</h5>
 			</div>
+			<form th:object="${signupform}" th:action="@{/saveuser}" action="#"
+				method="post">
+				<div>
+					<label>Username: <input type="text" th:field="*{username}"
+						class="form-control" /></label>
+					<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username
+						Error</p>
+				</div>
+				<div>
+					<label>Password: <input type="password"
+						th:field="*{password}" class="form-control" /></label>
+					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+						Error</p>
+				</div>
+				<div>
+					<label>Retype password: <input type="password"
+						th:field="*{passwordCheck}" class="form-control" /></label>
+					<p th:if="${#fields.hasErrors('passwordCheck')}"
+						th:errors="*{passwordCheck}">Password Match Error</p>
+				</div>
+				<div>
+					<label>Name: <input type="text" th:field="*{name}"
+						class="form-control" /></label>
+					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+						Error</p>
+				</div>
+				<div>
+					<label>E-mail:<input type="email" th:field="*{email}"
+						class="form-control" /></label>
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+						Error</p>
+				</div>
+
+				<input type="submit" class="btn btn-success" value="Register"></input>
+
+			</form>
 		</div>
+	</div>
 
 </body>
 </html>

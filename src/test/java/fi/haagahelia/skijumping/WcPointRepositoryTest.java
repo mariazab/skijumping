@@ -16,37 +16,42 @@ import fi.haagahelia.skijumping.domain.WcPointRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class WcPointRepositoryTest {
 
 	@Autowired
 	private WcPointRepository repository;
-	
-	//Test creating new World Cup Points
+
+	// Test creating new World Cup Points
 	@Test
 	public void createNewWcPoint() {
 		WcPoint wcPoint = new WcPoint(35, 0);
 		repository.save(wcPoint);
-		assertThat(wcPoint.getPosition()).isNotNull();	
+		assertThat(wcPoint.getPosition()).isNotNull();
 	}
-	
-	//Test finding wcPoint by points
+
+	// Test finding wcPoint by points
 	@Test
 	public void findByPoints() {
+
+		// Create new wc point
 		WcPoint newWcPoint = new WcPoint(35, 500);
 		repository.save(newWcPoint);
+
 		WcPoint wcPoint = repository.findByPoints(500);
 		assertThat(wcPoint.getPosition()).isEqualTo(35);
 	}
-	
-	//Test deleting wcPoint
+
+	// Test deleting wcPoint
 	@Test
 	public void deleteWcPoint() {
-		WcPoint newWcPoint = new WcPoint(35, 0);
+
+		// Create new wc point
+		WcPoint newWcPoint = new WcPoint(135, 0);
 		repository.save(newWcPoint);
-		WcPoint wcPoint = repository.findOne(35);
+		WcPoint wcPoint = repository.findOne(135);
 		repository.delete(wcPoint);
 		List<WcPoint> points = (List<WcPoint>) repository.findAll();
-		assertThat(points.get(points.size() - 1).getPosition()).isNotEqualTo(35);
+		assertThat(points.get(points.size() - 1).getPosition()).isNotEqualTo(135);
 	}
 }

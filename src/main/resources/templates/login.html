@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Login Page</title>
-        <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-        <link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
-    </head>
-    <body>
-    	
-    	<div id="login" class="container-fluid">
-    	<h1 id="welcome-login">Welcome to the World of Ski Jumping!</h1>
-    	<div id="login-card" class="card">
-				<div class="card-header"><h5>Login</h5></div>
-    	<div> 
-       		<div class="alert alert-danger" th:if="${param.error}">
-       			Invalid username and password.
-       		</div>
-       </div>
-       <div class="alert alert-warning" th:if="${param.logout}">
-       		You have been logged out.
-       </div>
-       <form th:action="@{/login}" method="post">
-       		<div><label> Username: <input type="text" name="username" class="form-control" /> </label></div>
-            <div><label> Password: <input type="password" name="password" class="form-control" /> </label></div>
-            <div><input type="submit" value="Sign In" class="btn btn-success" /></div>
-       </form>
-       <a th:href="@{/signup}">Create an account</a>
-       </div>
-       </div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<title>Login Page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
+</head>
+<body>
+
+	<div id="login" class="container-fluid">
+		<h1 id="welcome-login">Welcome to the World of Ski Jumping!</h1>
+		<div id="login-card" class="card">
+			<div class="card-header">
+				<h5>Login</h5>
+			</div>
+			<div>
+				<div class="alert alert-danger" th:if="${param.error}">
+					Invalid username and password.</div>
+			</div>
+			<div class="alert alert-warning" th:if="${param.logout}">
+				You have been logged out.</div>
+			<form th:action="@{/login}" method="post">
+				<div>
+					<label> Username: <input type="text" name="username"
+						class="form-control" />
+					</label>
+				</div>
+				<div>
+					<label> Password: <input type="password" name="password"
+						class="form-control" />
+					</label>
+				</div>
+				<div>
+					<input type="submit" value="Sign In" class="btn btn-success" />
+				</div>
+			</form>
+			<a th:href="@{/signup}">Create an account</a>
+		</div>
+	</div>
+</body>
 </html>

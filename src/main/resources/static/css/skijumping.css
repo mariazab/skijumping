@@ -91,3 +91,17 @@ html, body {
 	margin: 1%;
 }
 
+#message {
+	width: fit-content;
+	height: fit-content;
+}
+
+#message-text {
+	font-weight: bold;
+	margin: 0;
+}
+
+#users {
+	text-align: right;
+}
+

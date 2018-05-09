@@ -3,15 +3,11 @@ package fi.haagahelia.skijumping;
 
 import java.util.Properties;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import fi.haagahelia.skijumping.domain.User;
-import fi.haagahelia.skijumping.domain.UserRepository;
 
 @SpringBootApplication
 public class SkijumpingApplication {
@@ -26,8 +22,8 @@ public class SkijumpingApplication {
 		return (args) -> {
 			
 			//Create users
-			User admin = new User("admin", "$2a$04$R3s3tPYNka6e92pHX.10MOhrdbw8R8bzeemgSWqoG6uYMHJXUFfam", "admin", "worldofskijumping@gmail.com", "ADMIN");
-			User user = new User("user", "$2a$04$gp4vlWBNIAM9mFv79YMslOgBi.7aXwadAOhGdnkFCZ6AhQ0J/h8JC", "test user", "worldofskijumping@gmail.com", "USER");
+			User admin = new User("admin", "", "admin", "worldofskijumping@gmail.com", "ADMIN");
+			User user = new User("user", "", "test user", "worldofskijumping@gmail.com", "USER");
 			userRepository.save(admin);
 			userRepository.save(user);
 			
@@ -41,7 +37,7 @@ public class SkijumpingApplication {
 	    mailSender.setPort(587);
 	     
 	    mailSender.setUsername("worldofskijumping@gmail.com");
-	    mailSender.setPassword("jsifristmopfbvdp");
+	    mailSender.setPassword("");
 	     
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");

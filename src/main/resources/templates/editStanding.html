@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Edit standing</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
-	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" /> 
+	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" />
 </head>
 <body class="bg-dark">
-	
+
 	<div class="container-fluid">
-	<div id="add" class="container">
-	<div class="card">
-	<div class="card-header">
-	<h2>Edit standing</h2></div>
-	<div class="card-body">
-	<div class="form-group">
-		<form th:object="${standing}" th:action="@{../saveStanding}" action="#" method="post">
-			<input type="hidden" th:field="*{id}" />
-			<label for="athleteList">Athlete</label>
-			<input list="athleteList" class="form-control" th:field="*{athlete}"/><datalist id="athleteList">
-				<option th:each="athlete: ${athletes}"
-						th:value="${athlete.id}"
-						th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
-				</datalist>
-			<label for="points">Points</label>
-			<input type="text" id="points" th:field="*{points}" class="form-control" />
-			<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
-		</form>
+		<div id="add" class="container">
+			<div class="card">
+				<div class="card-header">
+					<h2>Edit standing</h2>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<form th:object="${standing}" th:action="@{../saveStanding}" action="#" method="post">
+							<input type="hidden" th:field="*{id}" /> 
+							
+							<label for="athleteList">Athlete</label> 
+							<input list="athleteList" class="form-control" th:field="*{athlete}" />
+							<datalist id="athleteList">
+								<option th:each="athlete: ${athletes}" th:value="${athlete.id}"
+										th:text="${athlete.firstName + ' ' + athlete.lastName}">
+								</option>
+							</datalist>
+							
+							<label for="points">Points</label> 
+							<input type="text" id="points" th:field="*{points}" class="form-control" /> 
+							
+							<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-		</div>
-		</div>
-	</div>
 	</div>
 
 </body>

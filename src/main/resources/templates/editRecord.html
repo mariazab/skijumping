@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Edit hill record</title>
-	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" />
 </head>
 <body class="bg-dark">
-	
+
 	<div class="container-fluid">
-	<div id="add" class="container">
-	<div class="card">
-	<div class="card-header">
-	<h2>Edit hill record</h2></div>
-	<div class="card-body">
-	<div class="form-group">
-		<form th:object="${record}" th:action="@{../saveRecord}" action="#" method="post">
-		<input type="hidden" th:field="*{id}" />
-			<label for="hillList">Hill</label>
-			<input list="hillList" th:field="*{hill}" class="form-control" /><datalist id="hillList">
-				<option th:each="hill: ${hills}"
-						th:value="${hill.id}"
-						th:text="${hill.name}"></option>
-			</datalist>
-			<label for="athleteList">Athlete</label>
-			<input list="athleteList" th:field="*{athlete}" class="form-control" /><datalist id="athleteList">
-				<option th:each="athlete: ${athletes}"
-						th:value="${athlete.id}"
-						th:text="${athlete.firstName + ' ' + athlete.lastName}"></option>
-			</datalist>
-			<label for="length">Length</label>
-			<input type="text" id="length" th:field="*{length}" class="form-control" />
-			<label for="year">Year</label>
-			<input type="text" id="year" th:field="*{year}" class="form-control" />
-			<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
-		</form>
+		<div id="add" class="container">
+			<div class="card">
+				<div class="card-header">
+					<h2>Edit hill record</h2>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<form th:object="${record}" th:action="@{../saveRecord}" action="#" method="post">
+							<input type="hidden" th:field="*{id}" /> 
+							
+							<label for="hillList">Hill</label>
+							<input list="hillList" th:field="*{hill}" class="form-control" />
+							<datalist id="hillList">
+								<option th:each="hill: ${hills}" th:value="${hill.id}"
+										th:text="${hill.name}">
+								</option>
+							</datalist>
+							
+							<label for="athleteList">Athlete</label> 
+							<input list="athleteList" th:field="*{athlete}" class="form-control" />
+							<datalist id="athleteList">
+								<option th:each="athlete: ${athletes}" th:value="${athlete.id}"
+										th:text="${athlete.firstName + ' ' + athlete.lastName}">
+								</option>
+							</datalist>
+							
+							<label for="length">Length</label> 
+							<input type="text" id="length" th:field="*{length}" class="form-control" /> 
+							
+							<label for="year">Year</label>
+							<input type="text" id="year" th:field="*{year}"	class="form-control" /> 
+							
+							<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-		</div>
-		</div>
-	</div>
 	</div>
 
 </body>

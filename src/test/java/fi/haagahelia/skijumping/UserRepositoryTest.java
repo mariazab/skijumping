@@ -16,36 +16,40 @@ import fi.haagahelia.skijumping.domain.UserRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRepositoryTest {
 
 	@Autowired
 	private UserRepository repository;
-	
+
 	@Test
 	public void createNewUser() {
 		User user = new User("test", "$2a$10$VRlfA/vqlj1XJPEFUNclAOn84wZNbuKJIY22IXlWZLHlW3w2O0I.2", "test", "test@test.com", "USER");
 		repository.save(user);
 		assertThat(user.getId()).isNotNull();
 	}
-	
+
 	@Test
 	public void deleteUser() {
-		User newUser = new User("test", "$2a$10$VRlfA/vqlj1XJPEFUNclAOn84wZNbuKJIY22IXlWZLHlW3w2O0I.2", "test", "test@test.com", "USER");
-		repository.save(newUser);
 		
+		//Create new user
+		User newUser = new User("test", "$2a$10$VRlfA/vqlj1XJPEFUNclAOn84wZNbuKJIY22IXlWZLHlW3w2O0I.2", "test",	"test@test.com", "USER");
+		repository.save(newUser);
+
 		User user = repository.findByUsername("test");
 		repository.delete(user);
-		
+
 		List<User> users = (List<User>) repository.findAll();
 		assertThat(users.get(users.size() - 1).getUsername()).isNotEqualTo("test");
 	}
-	
+
 	@Test
 	public void findByUsername() {
+		
+		//Create new user
 		User newUser = new User("test", "$2a$10$VRlfA/vqlj1XJPEFUNclAOn84wZNbuKJIY22IXlWZLHlW3w2O0I.2", "test", "test@test.com", "USER");
 		repository.save(newUser);
-		
+
 		User user = repository.findByUsername("test");
 		assertThat(user.getEmail()).isEqualTo("test@test.com");
 	}

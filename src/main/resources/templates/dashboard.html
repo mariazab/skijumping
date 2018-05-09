@@ -1,158 +1,250 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-	<title>Ski Jumping</title>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<title>Ski Jumping World</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"	th:href="@{css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
-	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-		<div class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
-		</div>
-		
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			
-  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    			<span class="navbar-toggler-icon"></span>
-  			</button>
-
-  			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-   				<ul class="navbar-nav mr-auto">
-      				<li class="nav-item active">
-        				<a class="nav-link" href="/dashboard" th:href="@{/dashboard}">Dashboard <span class="sr-only">(current)</span></a>
-      				</li>
-     				<li class="nav-item">
-        				<a class="nav-link" href="../athletes" th:href="@{../athletes}">Athletes</a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills</a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../competitions" th:href="@{../competitions}">Calendar</a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../standings" th:href="@{../standings}">World Cup Standings</a>
-      				</li>
-    			</ul>
-    			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-      				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log out</button>
-    			</form>
-  			</div>
-		</nav>
-		<div class="container-fluid bg-dark">
-	
-		<div class="row">
-		<div class="col">
-			<div id="latest-result" class="card">
-				<div id="header-results" class="card-header" ><h5 th:if="${lastCompetition.date != null}" th:text="${'Lastest Results - ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint}">Latest Results</h5></div>
-  				<div class="card-body">
-  					<h6 class="card-subtitle mb-2 text-muted" th:if="${lastCompetition.date != null}" th:text="${lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900) + ', ' + lastCompetition.type + ' competition'}">Card subtitle</h6>
-   					<table class="table">
-   							<tbody>
-   							<tr th:if="${topThree.athlete != null}" th:each="topThree: ${topThree}">
-   								<td th:if="${topThree.wcPoint != null}" th:text="${topThree.wcPoint.position}"></td>
-   								<th th:if="${topThree.athlete != null}" th:text="${topThree.athlete.firstName + ' ' + topThree.athlete.lastName}"></th>
-   								<th th:if="${topThree.points != null}" th:text="${topThree.points}"></th>
-   								</tr></tbody>
-   					</table>
-    				<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}" class="btn btn-info">See full results</a>
-  				</div>
-			</div>
-			</div>
-			<div class="col">
-			<div class="card">
-				<div class="card-header"><h5>Next competition</h5></div>
-				<img class="card-img" src="/photos/simon.jpg" alt="Card image" />
-  				<div class="card-img-overlay">
-   					<!-- <h5 class="card-title"></h5> -->
-   					<br /><br />
-    				<h6 class="card-subtitile mb-2" th:if="${competition.date != null}" th:text="${competition.date.getDate() + '.' + (competition.date.getMonth() + 1) + '.' + (competition.date.getYear() + 1900) + ', ' + competition.time.substring(0, 5) + ' CET'}"></h6>
-    				<h6 class="card-subtitle mb-2" th:if="${competition.hill != null}" th:text="${competition.hill.city + ', ' + competition.hill.name}"></h6>
-    				<!-- <h6 class="card-subtitle mb-2" th:if="${competition.hill != null}" th:text="${competition.hill.name}"></h6> -->
-    				<h6 class="card-subtitle mb-2"  th:if="${competition.type != null}" th:text="${competition.type}"></h6>
-    				<!-- <br /> -->
-    				<p class="card-text" th:if="${competition.hill != null}" th:text="${'Hill Size: ' + competition.hill.hsPoint + 'm'}">Here information about next competition will appear.</p>
-    				<p class="card-text" th:if="${competition.hill != null}" th:text="${'K-Point: ' + competition.hill.kPoint + 'm'}"></p>
-    				<th:block th:if="${competition.hill !=null}">
-    				<p class="card-text" th:if="${competition.hill.hillRecord != null}" th:text="${'Hill Record: ' + competition.hill.hillRecord.length + 'm, ' + competition.hill.hillRecord.athlete.firstName + ' ' + competition.hill.hillRecord.athlete.lastName + ' in ' + competition.hill.hillRecord.year}"></p>
-    				<p class="card-text" th:unless="${competition.hill.hillRecord != null}"><br /></p>
-    				</th:block>
-    				<a th:if="${competition.date != null}" id="sendBtn" href="/sendEmail" th:href="@{/sendEmail}" class="btn btn-info">Send me the information!</a>
-  				</div>
-			</div>
-			</div>
-			<div class="col">
-			  <div class="card">
-			  	<div class="card-header"><h5>World Cup Standings</h5></div>
-  				<div class="card-body">
-  				<h6 class="card-subtitle mb-2 text-muted" th:if="${lastCompetition.date != null}" th:text="${'Top 3 after ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint + ', ' + lastCompetition.date.getDate() + '.' + (lastCompetition.date.getMonth() + 1) + '.' + (lastCompetition.date.getYear() + 1900)}">Top 3</h6>
-  					<table class="table">
-   							<tbody th:with="i=0">
-   							<tr th:if="${standing.athlete.firstName != null}" th:each="standing, iterator: ${wcTopThree}">
-   								<td th:if="${standing.athlete.firstName != null}" th:text="${iterator.index + 1}"></td>
-   								<th th:if="${standing.athlete.firstName != null}" th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
-   								<th th:if="${standing.points != null}" th:text="${standing.points}"></th>
-   								</tr></tbody>
-   					</table>
-    				<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a>
-  				</div>
-			</div>
-			</div>
-			
-			<div class="w-100"></div>
-				<div class="col">
-			<div id="latest-result" class="card">
-				<div class="card-header"><h5>Latest Results - Your Favourites</h5></div>
-  				<div class="card-body">
-   						<table class="table">
-   							<tbody>
-   							<tr th:if="${favResult.athlete != null}" th:each="favResult: ${favResults}">
-   								<td th:if="${favResult.wcPoint != null}" th:text="${favResult.wcPoint.position}"></td>
-   								<th th:if="${favResult.athlete != null}" th:text="${favResult.athlete.firstName + ' ' + favResult.athlete.lastName}"></th>
-   								<th th:if="${favResult.points != null}" th:text="${favResult.points}"></th>
-   								</tr></tbody>
-   					</table>
-    				<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}" class="btn btn-info">See full results</a>
-  				</div>
-			</div>
-			</div>
-				<div class="col">
-			<div class="card">
-				<div class="card-header"><h5>FIS Ski Jumping on Twitter</h5></div>
-  				<div id="social-feed" class="card-body">
-    				<a class="twitter-timeline" data-height="350" data-theme="light" href="https://twitter.com/FISskijumping?ref_src=twsrc%5Etfw">Tweets by FISskijumping</a> <script th:inline="javascript" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  				</div>
-			</div>
-			</div>
-			<div class="col">
-			  <div class="card">
-			  	<div class="card-header"><h5>World Cup Standings - Your Favourites</h5></div>
-  				<div class="card-body">
-   					<table class="table">
-   							<tbody th:with="i=0">
-   							<tr th:if="${favStanding.athlete.firstName != null}" th:each="favStanding, iterator: ${favStandings}">
-   								<td th:if="${favStanding.athlete.firstName != null}" th:text="${favWcPosition[iterator.index] + 1}"></td>
-   								<th th:if="${favStanding.athlete.firstName != null}" th:text="${favStanding.athlete.firstName + ' ' + favStanding.athlete.lastName}"></th>
-   								<th th:if="${favStanding.points != null}" th:text="${favStanding.points}"></th>
-   								</tr></tbody>
-   					</table>
-   					
-    				<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a>
-  				</div>
-			</div>
-			</div>
-		
-		</div>
-		<br />
-		<div class="navbar">
-			<p class="text-secondary">2018 &copy; Maria Żabińska</p>
-			<p class="text-secondary">Need help? <a class="text-secondary" href="mailto:worldofskijumping@gmail.com">Send an email</a></p>
-		</div>
+	<!-- Welcome message -->
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+		<p sec:authorize="hasAuthority('ADMIN')" id="users"
+			class="text-secondary"
+			th:text="${'Registered users: ' + numberOfUsers}"></p>
 	</div>
 	
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					href="/dashboard" th:href="@{/dashboard}">Dashboard <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="../athletes"
+					th:href="@{../athletes}">Ski Jumpers</a></li>
+				<li class="nav-item"><a class="nav-link" href="../hills"
+					th:href="@{../hills}">Hills</a></li>
+				<li class="nav-item"><a class="nav-link" href="../competitions"
+					th:href="@{../competitions}">Calendar</a></li>
+				<li class="nav-item"><a class="nav-link" href="../standings"
+					th:href="@{../standings}">World Cup Standings</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+				method="post">
+				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log	out</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container-fluid bg-dark">
+	
+		<!-- Alert message if available -->
+		<div id="message" class="alert alert-info alert-dismissible fade show"
+			role="alert" th:if="${message != null}">
+			<p id="message-text" th:text="${message}"></p>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		
+		<div class="row">
+			<div class="col">
+				<!-- Latest results top 3 -->
+				<div id="latest-result" class="card">
+					<div id="header-results" class="card-header">
+						<h5 th:if="${lastCompetition.date != null}"
+							th:text="${'Lastest Results - ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint}"></h5>
+						<h5 th:unless="${lastCompetition.date != null}">Latest Results</h5>
+					</div>
+					<div class="card-body">
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:if="${lastCompetition.date != null}"
+							th:text="${#calendars.format(lastCompetition.date,'dd.MM.yyyy') + ', ' + lastCompetition.type + ' competition'}"></h6>
+						<table class="table">
+							<tbody>
+								<tr th:if="${topThree.athlete != null}"
+									th:each="topThree: ${topThree}">
+									<td th:if="${topThree.wcPoint != null}"
+										th:text="${topThree.wcPoint.position}"></td>
+									<th th:if="${topThree.athlete != null}"
+										th:text="${topThree.athlete.firstName + ' ' + topThree.athlete.lastName}"></th>
+									<th th:if="${topThree.points != null}"
+										th:text="${topThree.points}"></th>
+								</tr>
+							</tbody>
+						</table>
+						<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}"
+							class="btn btn-info">See full results</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col">
+				<!-- Next competition -->
+				<div class="card">
+					<div class="card-header">
+						<h5>Next competition</h5>
+					</div>
+					<img class="card-img" src="/photos/simon.jpg" alt="Card image" />
+					<div class="card-img-overlay">
+						<br />
+						<br />
+						<h6 class="card-subtitile mb-2"
+							th:if="${competition.date != null}"
+							th:text="${#calendars.format(competition.date,'dd.MM.yyyy, HH:mm') + ' CET'}"></h6>
+						<h6 class="card-subtitle mb-2" th:if="${competition.hill != null}"
+							th:text="${competition.hill.city + ', ' + competition.hill.name}"></h6>
+						<h6 class="card-subtitle mb-2" th:if="${competition.type != null}"
+							th:text="${competition.type}"></h6>
+						<!-- <br /> -->
+						<p class="card-text" th:if="${competition.hill != null}"
+							th:text="${'Hill Size: ' + competition.hill.hsPoint + 'm'}">Here
+							information about next competition will appear.</p>
+						<p class="card-text" th:if="${competition.hill != null}"
+							th:text="${'K-Point: ' + competition.hill.kPoint + 'm'}"></p>
+						<th:block th:if="${competition.hill !=null}">
+							<p class="card-text"
+								th:if="${competition.hill.hillRecord != null}"
+								th:text="${'Hill Record: ' + competition.hill.hillRecord.length + 'm, ' + competition.hill.hillRecord.athlete.firstName + ' ' + competition.hill.hillRecord.athlete.lastName + ' in ' + competition.hill.hillRecord.year}"></p>
+							<p class="card-text"
+								th:unless="${competition.hill.hillRecord != null}">
+								<br />
+							</p>
+						</th:block>
+						<a th:if="${competition.date != null}" id="sendBtn"
+							href="/sendEmail" th:href="@{/sendEmail}" class="btn btn-info">Send	me the info!</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col">
+				<!-- World Cup standings top 3 -->
+				<div class="card">
+					<div class="card-header">
+						<h5>World Cup Standings</h5>
+					</div>
+					<div class="card-body">
+						<h6 class="card-subtitle mb-2 text-muted"
+							th:if="${lastCompetition.date != null}"
+							th:text="${'Top 3 after ' + lastCompetition.hill.city + ' HS' + lastCompetition.hill.hsPoint + ', ' + #calendars.format(lastCompetition.date,'dd.MM.yyyy')}">
+							Top	3</h6>
+						<table class="table">
+							<tbody th:with="i=0">
+								<tr th:if="${standing.athlete.firstName != null}"
+									th:each="standing, iterator: ${wcTopThree}">
+									<td th:if="${standing.athlete.firstName != null}"
+										th:text="${iterator.index + 1}"></td>
+									<th th:if="${standing.athlete.firstName != null}"
+										th:text="${standing.athlete.firstName + ' ' + standing.athlete.lastName}"></th>
+									<th th:if="${standing.points != null}"
+										th:text="${standing.points}"></th>
+								</tr>
+							</tbody>
+						</table>
+						<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Dividing the page, next cards appearing on new line -->
+			<div class="w-100"></div>
+			
+			<div class="col">
+				<!-- Latest results user's fav -->
+				<div id="latest-result" class="card">
+					<div class="card-header">
+						<h5>Latest Results - Your Favorites</h5>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<tbody>
+								<tr th:if="${favResult.athlete != null}"
+									th:each="favResult: ${favResults}">
+									<td th:if="${favResult.wcPoint != null}"
+										th:text="${favResult.wcPoint.position}"></td>
+									<th th:if="${favResult.athlete != null}"
+										th:text="${favResult.athlete.firstName + ' ' + favResult.athlete.lastName}"></th>
+									<th th:if="${favResult.points != null}"
+										th:text="${favResult.points}"></th>
+								</tr>
+							</tbody>
+						</table>
+						<a href="#" th:href="@{results/{id}(id=${lastCompetition.id})}"
+							class="btn btn-info">See full results</a> <a href="#"
+							th:href="@{/favorites}" class="btn btn-warning">See your favorites</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col">
+				<!-- Twitter Feed -->
+				<div class="card">
+					<div class="card-header">
+						<h5>FIS Ski Jumping on Twitter</h5>
+					</div>
+					<div id="social-feed" class="card-body">
+						<a class="twitter-timeline" data-height="350" data-theme="light"
+							href="https://twitter.com/FISskijumping?ref_src=twsrc%5Etfw">Tweets
+							by FISskijumping</a>
+						<script th:inline="javascript"
+							src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col">
+				<!-- World Cup standings user's fav -->
+				<div class="card">
+					<div class="card-header">
+						<h5>World Cup Standings - Your Favorites</h5>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<tbody th:with="i=0">
+								<tr th:if="${favStanding.athlete.firstName != null}"
+									th:each="favStanding, iterator: ${favStandings}">
+									<td th:if="${favStanding.athlete.firstName != null}"
+										th:text="${favWcPosition[iterator.index] + 1}"></td>
+									<th th:if="${favStanding.athlete.firstName != null}"
+										th:text="${favStanding.athlete.firstName + ' ' + favStanding.athlete.lastName}"></th>
+									<th th:if="${favStanding.points != null}"
+										th:text="${favStanding.points}"></th>
+								</tr>
+							</tbody>
+						</table>
+						<a href="#" th:href="@{/standings}" class="btn btn-info">See full standings</a> 
+						<a href="#" th:href="@{/favorites}"	class="btn btn-warning">See your favorites</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<br />
+		
+		<!-- Footer -->
+		<div class="navbar">
+			<p class="text-secondary">2018 &copy; Maria Żabińska</p>
+			<p class="text-secondary">
+				Need help? <a class="text-secondary"
+					href="mailto:worldofskijumping@gmail.com">Send an email</a>
+			</p>
+		</div>
+	</div>
+
 </body>
 </html>

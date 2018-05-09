@@ -1,100 +1,168 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<title>Calendar</title>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"	th:href="@{css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
+	<!-- Welcome message -->
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+		<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
 	</div>
-		
+	
+	<!-- Navigation bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<!-- <h2 class="navbar-brand text-white" th:text="${'Welcome, ' + name + '!'}">Welcome</h2> -->
-  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    			<span class="navbar-toggler-icon"></span>
-  			</button>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-  			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-   				<ul class="navbar-nav mr-auto">
-      				<li class="nav-item">
-        				<a class="nav-link" href="/dashboard" th:href="@{/dashboard}">Dashboard</a>
-      				</li>
-     				<li class="nav-item">
-        				<a class="nav-link" href="../athletes" th:href="@{../athletes}">Athletes</a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills</a>
-      				</li>
-      				<li class="nav-item active">
-        				<a class="nav-link" href="../competitions" th:href="@{../competitions}">Calendar <span class="sr-only">(current)</span></a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../standings" th:href="@{../standings}">World Cup Standings</a>
-      				</li>
-    			</ul>
-    			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-      				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log out</button>
-    			</form>
-  			</div>
-		</nav>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/dashboard"
+					th:href="@{/dashboard}">Dashboard</a></li>
+				<li class="nav-item"><a class="nav-link" href="../athletes"
+					th:href="@{../athletes}">Ski Jumpers</a></li>
+				<li class="nav-item"><a class="nav-link" href="../hills"
+					th:href="@{../hills}">Hills</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="../competitions" th:href="@{../competitions}">Calendar <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="../standings"
+					th:href="@{../standings}">World Cup Standings</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+				method="post">
+				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log	out</button>
+			</form>
+		</div>
+	</nav>
 
 	<div class="container-fluid bg-dark">
 		<br />
-	<div class="card">
-				<div class="card-header">
-	<h2>Calendar</h2>
-	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-info" th:href="@{/addCompetition}">Add Competition</a></div>
-	<div class="card-body">
-	<table class="table table-hover">
-		<thead class="thead-dark">
-			<tr>
-				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
-				<th>Hill</th>
-				<th>Date</th>
-				<th>Time</th>
-				<th>Type</th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="competition: ${competitions}">
-				<td sec:authorize="hasAuthority('ADMIN')" th:text="${competition.id}"></td>
-				<td th:text="${competition.hill.city + ' HS' + competition.hill.hsPoint}"></td>
-				<th:block th:switch="${competition.date.getMonth()}">
-					<td th:case="0" th:text="${competition.date.getDate() + ' Jan ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="1" th:text="${competition.date.getDate() + ' Feb ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="2" th:text="${competition.date.getDate() + ' Mar ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="3" th:text="${competition.date.getDate() + ' Apr ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="4" th:text="${competition.date.getDate() + ' May ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="5" th:text="${competition.date.getDate() + ' Jun ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="6" th:text="${competition.date.getDate() + ' Jul ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="7" th:text="${competition.date.getDate() + ' Aug ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="8" th:text="${competition.date.getDate() + ' Sep ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="9" th:text="${competition.date.getDate() + ' Oct ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="10" th:text="${competition.date.getDate() + ' Nov ' + (competition.date.getYear() + 1900)}"></td>
-					<td th:case="11" th:text="${competition.date.getDate() + ' Dec ' + (competition.date.getYear() + 1900)}"></td>
-				</th:block>
-				<td th:text="${competition.time.substring(0, 5)}"></td>
-				<td th:text="${competition.type}"></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn btn-outline-info" th:href="@{/editCompetition/{id}(id=${competition.id})}">Edit</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/deleteCompetition/{id}(id=${competition.id})}">Delete</a></td>
-				<td><a class="btn btn-outline-info" th:href="@{/results/{id}(id=${competition.id})}">Results</a></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-	</div>
-	<br />
+		<div class="card">
+			<div class="card-header">
+				<h2>Calendar</h2>
+				<a sec:authorize="hasAuthority('ADMIN')"
+					class="btn btn-outline-info" th:href="@{/addCompetition}">Add Competition</a>
+			</div>
+			<div class="card-body">
+			
+				<!-- Alert message if available -->
+				<div id="message"
+					class="alert alert-info alert-dismissible fade show" role="alert"
+					th:if="${message != null}">
+					<p id="message-text" th:text="${message}"></p>
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th sec:authorize="hasAuthority('ADMIN')">ID</th>
+							<th>Hill</th>
+							<th>Date</th>
+							<th>Time CET</th>
+							<th>Type</th>
+							<th sec:authorize="hasAuthority('ADMIN')"></th>
+							<th sec:authorize="hasAuthority('ADMIN')"></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="competition: ${competitions}">
+							<td sec:authorize="hasAuthority('ADMIN')"
+								th:text="${competition.id}"></td>
+							<td
+								th:text="${competition.hill.city + ' HS' + competition.hill.hsPoint}"></td>
+							<!-- <td th:text="${#calendars.format(competition.date, 'dd MMM yyyy')}"></td> -->
+							<th:block th:switch="${#calendars.month(competition.date)}">
+								<td th:case="1"
+									th:text="${#calendars.format(competition.date,'dd') + ' Jan ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="2"
+									th:text="${#calendars.format(competition.date,'dd') + ' Feb ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="3"
+									th:text="${#calendars.format(competition.date,'dd') + ' Mar ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="4"
+									th:text="${#calendars.format(competition.date,'dd') + ' Apr ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="5"
+									th:text="${#calendars.format(competition.date,'dd') + ' May ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="6"
+									th:text="${#calendars.format(competition.date,'dd') + ' Jun ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="7"
+									th:text="${#calendars.format(competition.date,'dd') + ' Jul ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="8"
+									th:text="${#calendars.format(competition.date,'dd') + ' Aug ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="9"
+									th:text="${#calendars.format(competition.date,'dd') + ' Sep ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="10"
+									th:text="${#calendars.format(competition.date,'dd') + ' Oct ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="11"
+									th:text="${#calendars.format(competition.date,'dd') + ' Nov ' + #calendars.format(competition.date,'yyyy')}"></td>
+								<td th:case="12"
+									th:text="${#calendars.format(competition.date,'dd') + ' Dec ' + #calendars.format(competition.date,'yyyy')}"></td>
+							</th:block>
+							<td th:text="${#calendars.format(competition.date, 'HH:mm')}"></td>
+							<td th:text="${competition.type}"></td>
+							<td sec:authorize="hasAuthority('ADMIN')"><a
+								class="btn btn btn-outline-info"
+								th:href="@{/editCompetition/{id}(id=${competition.id})}">Edit</a></td>
+							<td sec:authorize="hasAuthority('ADMIN')">
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-outline-danger"
+									data-toggle="modal" data-target="#exampleModalCenter">
+									Delete
+								</button> 
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalCenterTitle"
+									aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalCenterTitle">
+												Are	you sure you want to delete?</h5>
+											</div>
+
+											<div class="modal-footer">
+												<a class="btn btn-outline-danger"
+													th:href="@{/deleteCompetition/{id}(id=${competition.id})}">Delete</a>
+												<button type="button" class="btn btn-primary"
+													data-dismiss="modal">No</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+							<td><a class="btn btn-outline-info"
+								th:href="@{/results/{id}(id=${competition.id})}">Results</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br />
+		
+		<!-- Footer -->
 		<div class="navbar">
 			<p class="text-secondary">2018 &copy; Maria Żabińska</p>
-			<p class="text-secondary">Need help? <a class="text-secondary" href="mailto:worldofskijumping@gmail.com">Send an email</a></p>
+			<p class="text-secondary">
+				Need help? <a class="text-secondary"
+					href="mailto:worldofskijumping@gmail.com">Send an email</a>
+			</p>
 		</div>
 	</div>
 

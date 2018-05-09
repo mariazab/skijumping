@@ -1,6 +1,6 @@
 package fi.haagahelia.skijumping.domain;
 
-import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,10 +30,8 @@ public class Competition {
 	private Hill hill;
 	
 	@Column(name = "date")
-	private Date date;
-	
-	@Column(name = "time")
-	private String time;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private Calendar date;
 	
 	@Column(name ="type")
 	private String type;
@@ -42,12 +42,11 @@ public class Competition {
 	public Competition() {
 	}
 
-	public Competition(Long id, Hill hill, Date date, String time, String type) {
+	public Competition(Long id, Hill hill, Calendar date, String type) {
 		super();
 		this.id = id;
 		this.hill = hill;
 		this.date = date;
-		this.time = time;
 		this.type = type;
 	}
 
@@ -73,20 +72,12 @@ public class Competition {
 		this.hill = hill;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
 	}
 
 	public String getType() {

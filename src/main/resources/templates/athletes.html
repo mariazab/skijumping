@@ -1,87 +1,139 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org"
-		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>Athletes</title>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<title>Ski Jumpers</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"	th:href="@{css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-	
-	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
-	</div>
-		
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<!-- <h2 class="navbar-brand text-white" th:text="${'Welcome, ' + name + '!'}">Welcome</h2> -->
-  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    			<span class="navbar-toggler-icon"></span>
-  			</button>
 
-  			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-   				<ul class="navbar-nav mr-auto">
-      				<li class="nav-item">
-        				<a class="nav-link" href="/dashboard" th:href="@{/dashboard}">Dashboard</a>
-      				</li>
-     				<li class="nav-item active">
-        				<a class="nav-link" href="../athletes" th:href="@{../athletes}">Athletes <span class="sr-only">(current)</span></a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../hills" th:href="@{../hills}">Hills</a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../competitions" th:href="@{../competitions}">Calendar</a>
-      				</li>
-      				<li class="nav-item">
-        				<a class="nav-link" href="../standings" th:href="@{../standings}">World Cup Standings</a>
-      				</li>
-    			</ul>
-    			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-      				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log out</button>
-    			</form>
-  			</div>
-		</nav>
+	<!-- Welcome message -->
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<h1 class="welcome" th:text="${'Welcome, ' + name + '!'}">Welcome</h1>
+	</div>
 	
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/dashboard"
+					th:href="@{/dashboard}">Dashboard</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="../athletes" th:href="@{../athletes}">Ski jumpers <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="../hills"
+					th:href="@{../hills}">Hills</a></li>
+				<li class="nav-item"><a class="nav-link" href="../competitions"
+					th:href="@{../competitions}">Calendar</a></li>
+				<li class="nav-item"><a class="nav-link" href="../standings"
+					th:href="@{../standings}">World Cup Standings</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" th:action="@{/logout}"
+				method="post">
+				<button class="btn btn-outline-info my-2 my-sm-0" type="submit">Log	out</button>
+			</form>
+		</div>
+	</nav>
+
 	<div class="container-fluid bg-dark">
-	<br />
-	<div class="card">
-				<div class="card-header">
-	<h2>Athletes</h2>
-	<a class="btn btn-outline-warning my-2 my-sm-0" th:href="@{/favorites}">See your favorites</a>
-	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-info" th:href="@{/addAthlete}">Add Athlete</a></div>
-	<div class="card-body">
-	<table class="table table-hover">
-		<thead class="thead-dark">
-			<tr>
-				<th sec:authorize="hasAuthority('ADMIN')">ID</th>
-				<th>Name</th>
-				<th>Nationality</th>
-				<th>Birth year</th>
-				<th></th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
-				<th sec:authorize="hasAuthority('ADMIN')"></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="athlete: ${athletes}">
-				<td sec:authorize="hasAuthority('ADMIN')" th:text="${athlete.id}"></td>
-				<td th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
-				<td th:text="${athlete.nationality}"></td>
-				<td th:text="${athlete.birthYear}"></td>
-				<td><a class="btn btn-outline-warning" th:href="@{/addToFav/{id}(id=${athlete.id})}">Favorite</a></td>			
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-info" th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
-				<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-outline-danger" th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a></td>
-			</tr>
-			<!-- <td th:unless="${athlete.id != favAthletes[iterator.index].athlete.id}"><a class="btn btn-outline-warning" th:href="@{/deleteFromFav/{id}(id=${athlete.id})}">Delete from Favorites</a></td> -->
-		</tbody>
-	</table>
-	</div>
-	</div>
-	<br />
+		<br />
+		<div class="card">
+			<div class="card-header">
+				<h2>Ski Jumpers</h2>
+				<a class="btn btn-outline-warning my-2 my-sm-0" th:href="@{/favorites}">See your favorites</a> 
+				<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-info" th:href="@{/addAthlete}">Add Athlete</a>
+			</div>
+			<div class="card-body">
+			
+				<!-- Alert message if available -->
+				<div id="message"
+					class="alert alert-info alert-dismissible fade show" role="alert"
+					th:if="${message != null}">
+					<p id="message-text" th:text="${message}"></p>
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<table class="table table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th sec:authorize="hasAuthority('ADMIN')">ID</th>
+							<th>Name</th>
+							<th>Nationality</th>
+							<th>Birth year</th>
+							<th></th>
+							<th sec:authorize="hasAuthority('ADMIN')"></th>
+							<th sec:authorize="hasAuthority('ADMIN')"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="athlete: ${athletes}">
+							<td sec:authorize="hasAuthority('ADMIN')" th:text="${athlete.id}"></td>
+							<td
+								th:text="${athlete.firstName + ' ' + athlete.lastName.toUpperCase()}"></td>
+							<td th:text="${athlete.nationality}"></td>
+							<td th:text="${athlete.birthYear}"></td>
+							<td><a class="btn btn-outline-warning"
+								th:href="@{/addToFav/{id}(id=${athlete.id})}">Favorite</a></td>
+							<td sec:authorize="hasAuthority('ADMIN')"><a
+								class="btn btn-outline-info"
+								th:href="@{/editAthlete/{id}(id=${athlete.id})}">Edit</a></td>
+							<td sec:authorize="hasAuthority('ADMIN')">
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-outline-danger"
+									data-toggle="modal" data-target="#exampleModalCenter">
+									Delete</button> 
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalCenterTitle"
+									aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalCenterTitle">
+												Are	you sure you want to delete?</h5>
+											</div>
+
+											<div class="modal-footer">
+												<a class="btn btn-outline-danger"
+													th:href="@{/deleteAthlete/{id}(id=${athlete.id})}">Delete</a>
+												<button type="button" class="btn btn-primary"
+													data-dismiss="modal">No</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br />
+		
+		<!-- Footer -->
 		<div class="navbar">
 			<p class="text-secondary">2018 &copy; Maria Żabińska</p>
-			<p class="text-secondary">Need help? <a class="text-secondary" href="mailto:worldofskijumping@gmail.com">Send an email</a></p>
+			<p class="text-secondary">
+				Need help? <a class="text-secondary"
+					href="mailto:worldofskijumping@gmail.com">Send an email</a>
+			</p>
 		</div>
 	</div>
 

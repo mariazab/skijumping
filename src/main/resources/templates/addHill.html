@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Add hill</title>
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" /> 
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"	th:href="@{../css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{../css/skijumping.css}" />
 </head>
 <body class="bg-dark">
-	
+
 	<div class="container-fluid">
-	<div id="add" class="container">
-	<div class="card">
-	<div class="card-header">
-	<h2>Add hill</h2></div>
-	<div class="card-body">
-	<div class="form-group">
-		<form th:object="${hill}" th:action="@{saveHill}" action="#" method="post">
-			<label for="name">Name</label>
-			<input type="text" id="name" th:field="*{name}" class="form-control" />
-			<label for="country">Country</label>
-			<input type="text" id="country" th:field="*{country}" class="form-control" />
-			<label for="country">City</label>
-			<input type="text" id="city" th:field="*{city}" class="form-control" />
-			<label for="hsPoint">HS</label>
-			<input type="text" id="hsPoint" th:field="*{hsPoint}" class="form-control" />
-			<label for="kPoint">K-Point</label>
-			<input type="text" id="kPoint" th:field="*{kPoint}" class="form-control" />
-			<label for="buildYear">Year of build</label>
-			<input type="text" id="buildYear" th:field="*{buildYear}" class="form-control" />
-			<input type="submit" value="Save" id="save-btn" class="btn btn-success"></input>
-		</form>
+		<div id="add" class="container">
+			<div class="card">
+				<div class="card-header">
+					<h2>Add hill</h2>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<form th:object="${hill}" th:action="@{saveHill}" action="#" method="post">
+							<label for="name">Name</label> 
+							<input type="text" id="name" th:field="*{name}" class="form-control" /> 
+							
+							<label for="country">Country</label>
+							<input type="text" id="country" th:field="*{country}" class="form-control" /> 
+							
+							<label for="country">City</label> 
+							<input type="text" id="city" th:field="*{city}" class="form-control" />
+							
+							<label for="hsPoint">HS</label> 
+							<input type="text" id="hsPoint" th:field="*{hsPoint}" class="form-control" /> 
+							
+							<label for="kPoint">K-Point</label> 
+							<input type="text" id="kPoint" th:field="*{kPoint}" class="form-control" /> 
+							
+							<label for="buildYear">Year of build</label> 
+							<input type="text" id="buildYear" th:field="*{buildYear}" class="form-control" />
+							
+							<input type="submit" value="Save" id="save-btn"	class="btn btn-success"></input>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-		</div>
-		</div>
-	</div>
 	</div>
 
 </body>

@@ -13,26 +13,25 @@ import fi.haagahelia.skijumping.web.HillController;
 import fi.haagahelia.skijumping.web.SkiJumpingController;
 import fi.haagahelia.skijumping.web.WcStandingController;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SkijumpingApplicationTests {
 
 	@Autowired
 	private SkiJumpingController skiJumpingController;
-	
+
 	@Autowired
 	private AthleteController athleteController;
-	
-	@Autowired 
+
+	@Autowired
 	private HillController hillController;
-	
+
 	@Autowired
 	private CompetitionController competitionController;
-	
+
 	@Autowired
 	private WcStandingController standingController;
-	
+
 	@Test
 	public void contextLoads() {
 		assertThat(skiJumpingController).isNotNull();
