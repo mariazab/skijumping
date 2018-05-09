@@ -97,16 +97,16 @@
 							<td sec:authorize="hasAuthority('ADMIN')">
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-outline-danger"
-									data-toggle="modal" data-target="#exampleModalCenter">
+									data-toggle="modal" th:attr="data-target='#Modal'+${athlete.id}">
 									Delete</button> 
 								<!-- Modal -->
-								<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalCenterTitle"
+								<div class="modal fade" th:id="Modal+${athlete.id}" tabindex="-1"
+									role="dialog" aria-labelledby="ModalCenterTitle"
 									aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalCenterTitle">
+												<h5 class="modal-title" id="ModalCenterTitle">
 												Are	you sure you want to delete?</h5>
 											</div>
 

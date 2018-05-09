@@ -100,17 +100,17 @@
 							</td>
 							<td sec:authorize="hasAuthority('ADMIN')">
 								<!-- Button trigger modal for hill-->
-								<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#ModalHill">
+								<button type="button" class="btn btn-outline-danger" data-toggle="modal" th:attr="data-target='#ModalHill'+${hill.id}">
 									Delete Hill
 								</button> 
 								<!-- Modal for hill -->
-								<div class="modal fade" id="ModalHill" tabindex="-1"
-									role="dialog" aria-labelledby="exampleModalCenterTitle"
+								<div class="modal fade" th:id="ModalHill+${hill.id}" tabindex="-1"
+									role="dialog" aria-labelledby="ModalCenterTitle"
 									aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalCenterTitle">
+												<h5 class="modal-title" id="ModalCenterTitle">
 													Are	you sure you want to delete?
 												</h5>
 											</div>
@@ -137,11 +137,11 @@
 								
 								<!-- Button trigger modal for record -->
 								<button type="button" class="btn btn-outline-danger"
-									data-toggle="modal" data-target="#ModalRecord">
+									data-toggle="modal" th:attr="data-target='#ModalRecord'+${hill.hillRecord.id}">
 									Delete Record
 								</button> 
 								<!-- Modal for record-->
-								<div class="modal fade" id="ModalRecord" tabindex="-1"
+								<div class="modal fade" th:id="ModalRecord+${hill.hillRecord.id}" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalCenterTitle"
 									aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
