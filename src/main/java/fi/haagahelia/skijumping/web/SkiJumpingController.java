@@ -130,15 +130,14 @@ public class SkiJumpingController {
 		// Save information mentioned in email
 		Hill hill = competition.getHill();
 		
-		DateFormat format = new SimpleDateFormat("HH:mm");
-		System.out.println(format.format(competition.getDate().getTime()));
+		DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
 		// Set the basic content of the email
 		String content = "Hi " + name + "!\n\nHow's everything going?\n"
 				+ "\nHere is the information about next competition:\n" + "\nType: " + competition.getType()
-				+ "\nDate: " + competition.getDate().get(Calendar.DAY_OF_MONTH) + "."
-				+ competition.getDate().get(Calendar.MONTH) + '.' + competition.getDate().get(Calendar.YEAR)
-				+ "\nStarting time: " + format.format(competition.getDate().getTime())
+				+ "\nDate: " + dateFormat.format(competition.getDate().getTime())
+				+ "\nStarting time: " + timeFormat.format(competition.getDate().getTime())
 				+ "\nHill: " + hill.getName() + "\nCity: " + hill.getCity()
 				+ "\nYear of construction: " + hill.getBuildYear() + "\nK-Point: " + hill.getkPoint() + "m\nHS: "
 				+ hill.getHsPoint() + "m";
