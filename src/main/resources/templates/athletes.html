@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>Ski Jumpers</title>
+	<title>Ski jumpers</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"	th:href="@{css/bootstrap.min.css}" />
 	<link type="text/css" rel="stylesheet" href="css/skijumping.css" th:href="@{css/skijumping.css}" />
@@ -53,7 +53,7 @@
 		<br />
 		<div class="card">
 			<div class="card-header">
-				<h2>Ski Jumpers</h2>
+				<h2>Ski jumpers</h2>
 				<a class="btn btn-outline-warning my-2 my-sm-0" th:href="@{/favorites}">See your favorites</a> 
 				<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-outline-info" th:href="@{/addAthlete}">Add Athlete</a>
 			</div>
@@ -75,7 +75,7 @@
 						<tr>
 							<th sec:authorize="hasAuthority('ADMIN')">ID</th>
 							<th>Name</th>
-							<th>Nationality</th>
+							<th>Nation</th>
 							<th>Birth year</th>
 							<th></th>
 							<th sec:authorize="hasAuthority('ADMIN')"></th>

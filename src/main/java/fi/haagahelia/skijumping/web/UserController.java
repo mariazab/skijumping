@@ -85,7 +85,7 @@ public class UserController {
 		String content = "Hi " + name + "!\n\nWelcome to the World of Ski Jumping!\n"
 				+ "\nIt is very exciting to have you on board! (or maybe on hill? :))"
 				+ "\nOn this website you can check out the latest results and world cup standings,"
-				+ "information about the next competition and the Twitter Feed of FIS Ski Jumping."
+				+ " information about next competition and the Twitter Feed of FIS Ski Jumping."
 				+ "\nYou can also add ski jumpers to your favorites and see their results on your dashboard!\n\n"
 				+ "If you have any questions or feedback, please don't hesitate to send an email!\n\n\n"
 				+ "Happy cheering!\n\nMay the wind be in your favour! :)\n\n\n\n"

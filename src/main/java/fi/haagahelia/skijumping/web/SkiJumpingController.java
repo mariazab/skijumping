@@ -1,5 +1,7 @@
 package fi.haagahelia.skijumping.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -127,16 +129,20 @@ public class SkiJumpingController {
 
 		// Save information mentioned in email
 		Hill hill = competition.getHill();
+		
+		DateFormat format = new SimpleDateFormat("HH:mm");
+		System.out.println(format.format(competition.getDate().getTime()));
 
 		// Set the basic content of the email
 		String content = "Hi " + name + "!\n\nHow's everything going?\n"
-				+ "\nHere are the information about the next competition:\n" + "\nType: " + competition.getType()
+				+ "\nHere is the information about next competition:\n" + "\nType: " + competition.getType()
 				+ "\nDate: " + competition.getDate().get(Calendar.DAY_OF_MONTH) + "."
 				+ competition.getDate().get(Calendar.MONTH) + '.' + competition.getDate().get(Calendar.YEAR)
-				+ "\nStarting time: " + competition.getDate().get(Calendar.HOUR_OF_DAY) + ":"
-				+ competition.getDate().get(Calendar.MINUTE) + "\nHill: " + hill.getName() + "\nCity: " + hill.getCity()
+				+ "\nStarting time: " + format.format(competition.getDate().getTime())
+				+ "\nHill: " + hill.getName() + "\nCity: " + hill.getCity()
 				+ "\nYear of construction: " + hill.getBuildYear() + "\nK-Point: " + hill.getkPoint() + "m\nHS: "
 				+ hill.getHsPoint() + "m";
+		
 
 		//If the record is not null, add record info to email
 		if (hill.getHillRecord() != null) {
